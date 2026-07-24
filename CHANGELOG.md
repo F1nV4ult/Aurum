@@ -6,6 +6,17 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Fixed — Phase 1 reliability baseline
+- **Walk-forward backtests now support programmatic calls without dates.** The core OOS metrics
+  remain available; only the presentation-only monthly-return breakdown is omitted when no complete
+  ISO date series is supplied. This prevents a valid quantitative run from failing on an optional UI
+  input.
+- **`npm test` now executes every deterministic feature suite**: core engine, allocation, escaping,
+  edge-case and integration tests, plus covariance, resampling, HRP, CVaR, maximum-diversification,
+  factor-risk, turnover, and walk-forward coverage. CI inherits this complete gate.
+- Declared the Node runtime as **ES modules** in `package.json`, removing module-format ambiguity
+  during local and CI validation.
+
 ### Added — Group 1a · Estimation & robustness (covariance)
 - **Ledoit-Wolf (2004) shrinkage covariance** toward a constant-correlation target, with the
   closed-form optimal intensity δ (`engine.ledoitWolfCovariance`) — the standard remedy for the

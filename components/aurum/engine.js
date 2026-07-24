@@ -278,19 +278,27 @@ function backtestStatsFromDaily(portDaily, benchDaily, dates, rf) {
   const trackingErr = annVol(activeDaily);
   const infoRatio   = trackingErr > 1e-9 ? activeAnn / trackingErr : 0;
 
-  // Monthly returns: compound log returns per 'YYYY-MM'
+  // Monthly returns: compound log returns per 'YYYY-MM'. Dates are optional
+  // for programmatic callers (for example, deterministic backtest tests), so
+  // omit this presentation-only breakdown when a complete date series is not
+  // available rather than failing an otherwise valid backtest.
   const monthlyReturns = {};
   let monthLogSum = 0, curMonth = null;
-  for (let t = 0; t < T; t++) {
-    const mo = dates[t].substring(0, 7);
-    if (curMonth && mo !== curMonth) {
-      monthlyReturns[curMonth] = Math.exp(monthLogSum) - 1;
-      monthLogSum = 0;
+  const hasDates = Array.isArray(dates)
+    && dates.length === T
+    && dates.every(date => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}/.test(date));
+  if (hasDates) {
+    for (let t = 0; t < T; t++) {
+      const mo = dates[t].substring(0, 7);
+      if (curMonth && mo !== curMonth) {
+        monthlyReturns[curMonth] = Math.exp(monthLogSum) - 1;
+        monthLogSum = 0;
+      }
+      monthLogSum += portDaily[t];
+      curMonth = mo;
     }
-    monthLogSum += portDaily[t];
-    curMonth = mo;
+    if (curMonth) monthlyReturns[curMonth] = Math.exp(monthLogSum) - 1;
   }
-  if (curMonth) monthlyReturns[curMonth] = Math.exp(monthLogSum) - 1;
 
   return {
     portNav, benchNav,

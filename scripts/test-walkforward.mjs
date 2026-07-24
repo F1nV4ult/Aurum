@@ -34,6 +34,7 @@ check(wf !== null, 'returns a result');
 check(wf.stats.oosObservations === T - lookback, 'OOS length = T − lookback', `=${wf.stats.oosObservations}`);
 check(wf.stats.rebalances === Math.ceil((T - lookback) / rebalEvery), 'rebalance count correct', `=${wf.stats.rebalances}`);
 check(wf.portNav.length === T - lookback + 1 && wf.portNav.every(x => x > 0), 'NAV positive, length M+1');
+check(Object.keys(wf.backtest.monthlyReturns).length === 0, 'omits monthly breakdown when dates are absent');
 
 console.log('\nbenchmark-relative stats');
 check(typeof wf.stats.trackingError === 'number' && typeof wf.stats.infoRatio === 'number', 'tracking error + info ratio present');

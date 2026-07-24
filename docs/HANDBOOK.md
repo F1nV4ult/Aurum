@@ -205,6 +205,8 @@ forward. Every day's return is earned by weights estimated **strictly from the p
 look-ahead). Reuses `optimise()`, so it covers every mode + estimator; reports OOS return / vol /
 Sharpe / max-DD / Calmar and (vs the benchmark) tracking error / info ratio / win rate. Runs in a
 **dedicated worker** (it re-optimises many times) and is surfaced as a toggle on the backtest card.
+Dates are optional for programmatic use: when omitted, the core OOS analytics remain available and
+the date-dependent monthly-return breakdown is intentionally omitted.
 
 ### 2.7 Monte Carlo (`runMonteCarlo`) — analytical, not simulated
 
@@ -271,7 +273,7 @@ keep curated weights, real β vs SPY); manual dispatch → full `build-portfolio
 Commits `sample-portfolios.json` (push → Vercel redeploys). `ci.yml` runs the offline test suites
 (`test-engine`/`-allocation`/`-escape` plus the per-feature suites `test-covariance`, `-resample`,
 `-hrp`, `-cvar`, `-maxdiv`, `-factor`, `-turnover`, `-walkforward` — 360+ deterministic assertions)
-on push/PR + weekly. `push-report.yml` posts a per-push change summary to Discord.
+on push/PR + weekly through `npm test`. `push-report.yml` posts a per-push change summary to Discord.
 
 ---
 
