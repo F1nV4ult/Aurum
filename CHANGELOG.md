@@ -6,6 +6,12 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Added — Phase 4 Yahoo data resilience
+- History and benchmark requests now retry bounded transient transport and upstream failures
+  (`408`, `425`, `5xx`) with exponential backoff before using the existing stale-cache/error path.
+  Explicit `429` rate-limit responses are never retried, preventing client bursts from worsening
+  the Yahoo constraint. The retry policy is covered by a deterministic offline test.
+
 ### Fixed — Sample portfolio import
 - **Open in Optimizer** now writes the selected sample portfolio to the same session-scoped
   handoff store consumed by the optimizer. Selected tickers are restored before auto-optimisation

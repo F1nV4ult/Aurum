@@ -19,8 +19,35 @@ const DB_VERSION = 1;
 const STORE_NAME = 'history';
 const CACHE_TTL  = 24 * 60 * 60 * 1000;  // 24h
 const CAP_TTL    =  6 * 60 * 60 * 1000;  // 6h for market caps
+const RETRYABLE_STATUS = new Set([408, 425, 500, 502, 503, 504]);
 
 let _db = null;
+/**
+ * Retry a short-lived transport or upstream fault without retrying a 429.
+ * A 429 is an explicit local rate-limit signal; retrying it would amplify the
+ * burst against Yahoo, so callers fall through to their cache/error path.
+ * Injectable dependencies keep this policy deterministic under test.
+ */
+export async function fetchWithBackoff(url, {
+  fetchImpl = fetch,
+  maxAttempts = 3,
+  baseDelayMs = 250,
+  sleep = ms => new Promise(resolve => setTimeout(resolve, ms)),
+} = {}) {
+  let lastResponse = null;
+  const attempts = Math.max(1, Math.floor(maxAttempts));
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    try {
+      const response = await fetchImpl(url);
+      if (response.ok || !RETRYABLE_STATUS.has(response.status) || attempt === attempts - 1) return response;
+      lastResponse = response;
+    } catch (error) {
+      if (attempt === attempts - 1) throw error;
+    }
+    await sleep(baseDelayMs * (2 ** attempt));
+  }
+  return lastResponse;
+}
 
 async function openDB() {
   if (_db) return _db;
@@ -58,7 +85,7 @@ async function fetchTickerHistory(ticker) {
 
   let res;
   try {
-    res = await fetch(`/api/yahoo-proxy?symbol=${encodeURIComponent(ticker)}&mode=history&range=1y`);
+    res = await fetchWithBackoff(`/api/yahoo-proxy?symbol=${encodeURIComponent(ticker)}&mode=history&range=1y`);
   } catch (networkErr) {
     if (cached) {
       console.warn(`Network error for ${ticker}; using stale cache (${Math.round((Date.now() - cached.fetchedAt) / 60000)}min old)`);
@@ -260,7 +287,7 @@ export async function fetchBenchmarkReturns(dates, symbol = 'SPY') {
   }
 
   let res;
-  try { res = await fetch(`/api/yahoo-proxy?symbol=${encodeURIComponent(sym)}&mode=history&range=1y`); }
+  try { res = await fetchWithBackoff(`/api/yahoo-proxy?symbol=${encodeURIComponent(sym)}&mode=history&range=1y`); }
   catch { return new Array(dates.length).fill(0); }
 
   if (!res.ok || res.status === 204) return new Array(dates.length).fill(0);

@@ -60,6 +60,12 @@ sample portfolio's ticker list to the optimizer's session-scoped portfolio key, 
 the optimizer. The optimizer restores those tickers before consuming the local auto-run notice;
 the imported list therefore remains limited to the current browser session.
 
+**Yahoo resilience (Phase 4)** — On a cache miss, history and benchmark requests retry only short-lived
+network or upstream failures (`408`, `425`, `5xx`) up to three times with a 250 ms exponential backoff.
+The client never retries `429`: it instead preserves the proxy's rate-limit boundary and uses a stale
+IndexedDB record when present. This complements the edge cache and stale-on-error client cache rather
+than treating Yahoo as a replaceable provider.
+
 ---
 
 ## 1. Architecture at a glance
