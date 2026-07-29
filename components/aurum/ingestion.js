@@ -20,6 +20,7 @@ const STORE_NAME = 'history';
 const CACHE_TTL  = 24 * 60 * 60 * 1000;  // 24h
 const CAP_TTL    =  6 * 60 * 60 * 1000;  // 6h for market caps
 import { assessDataQuality, validateHistory } from './data-quality.js';
+import { fetchWithProviderFallback } from './market-provider.js';
 
 const RETRYABLE_STATUS = new Set([408, 425, 500, 502, 503, 504]);
 
@@ -91,30 +92,27 @@ async function fetchTickerHistory(ticker) {
     return { ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'cache', stale: false };
   }
 
-  let res;
-  try {
-    res = await fetchWithBackoff(`/api/yahoo-proxy?symbol=${encodeURIComponent(ticker)}&mode=history&range=1y`);
-  } catch (networkErr) {
-    if (cached) {
-      console.warn(`Network error for ${ticker}; using stale cache (${Math.round((Date.now() - cached.fetchedAt) / 60000)}min old)`);
-      return { ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'stale-cache', stale: true };
-    }
-    throw new Error(`Network error fetching ${ticker}: ${networkErr.message}`);
-  }
-
-  if (!res.ok) {
-    if (cached) {
-      console.warn(`Yahoo proxy ${res.status} for ${ticker}; using stale cache`);
-      return { ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'stale-cache', stale: true };
-    }
-    throw new Error(`Yahoo proxy returned ${res.status} for ${ticker}`);
-  }
-
-  const data = await res.json();
-  const history = validateHistory(ticker, data.series?.map(p => p.date), data.series?.map(p => p.adjClose));
-  const fetchedAt = Date.now();
-  await idbPut({ ...history, fetchedAt });
-  return { ...history, fetchedAt, source: 'live', stale: false };
+  const primary = {
+    name: 'Yahoo Finance',
+    fetch: async () => {
+      let res;
+      try { res = await fetchWithBackoff(`/api/yahoo-proxy?symbol=${encodeURIComponent(ticker)}&mode=history&range=1y`); }
+      catch (error) { throw new Error(`network error: ${error.message}`); }
+      if (!res.ok) throw new Error(`proxy returned ${res.status}`);
+      const data = await res.json();
+      const history = validateHistory(ticker, data.series?.map(p => p.date), data.series?.map(p => p.adjClose));
+      const fetchedAt = Date.now();
+      await idbPut({ ...history, fetchedAt });
+      return { ...history, fetchedAt, source: 'live', stale: false };
+    },
+  };
+  const fallback = cached ? {
+    name: 'browser cache',
+    fetch: async () => ({ ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'stale-cache', stale: true }),
+  } : null;
+  const resolved = await fetchWithProviderFallback(primary, fallback, { ticker });
+  if (resolved.usedFallback) console.warn(`Yahoo unavailable for ${ticker}; using validated browser cache.`);
+  return resolved.value;
 }
 
 function alignSeries(histories) {

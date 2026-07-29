@@ -186,7 +186,8 @@ function renderDataQuality(quality) {
   const items = quality.warnings.length ? quality.warnings.map(message => `<li>${escapeHtml(message)}</li>`).join('') : '<li>All retained histories passed validation and share a healthy common date range.</li>';
   card.className = `data-quality-card ${warning ? 'warning' : 'ok'}`;
   card.style.display = 'block';
-  card.innerHTML = `<div class="data-quality-head"><span>Market-data quality</span><strong>${warning ? 'Review warnings' : 'Validated'}</strong></div><div class="data-quality-meta">${quality.retained}/${quality.requested} assets retained · latest common date ${escapeHtml(quality.latestDate || '—')} · ${freshness} · ${Math.round(quality.alignment * 100)}% alignment</div><ul>${items}</ul>`;
+  const sources = quality.sources?.join(', ') || 'unknown';
+  card.innerHTML = `<div class="data-quality-head"><span>Market-data quality</span><strong>${warning ? 'Review warnings' : 'Validated'}</strong></div><div class="data-quality-meta">${quality.retained}/${quality.requested} assets retained · latest common date ${escapeHtml(quality.latestDate || '—')} · ${freshness} · ${Math.round(quality.alignment * 100)}% alignment · source ${escapeHtml(sources)}</div><ul>${items}</ul>`;
 }
 
 // ── Local analysis snapshots ────────────────────────────────────────────────

@@ -35,6 +35,7 @@ export function assessDataQuality({ requestedTickers = [], histories = [], faile
   const available = new Set(histories.map(history => history.ticker));
   const missing = [...new Set([...failed, ...requestedTickers.filter(ticker => !available.has(ticker))])];
   const stale = histories.filter(history => history.stale).map(history => history.ticker);
+  const sources = [...new Set(histories.map(history => history.source || 'unknown'))];
   const suspicious = [];
   histories.forEach(history => {
     for (let index = 1; index < history.prices.length; index++) {
@@ -52,5 +53,5 @@ export function assessDataQuality({ requestedTickers = [], histories = [], faile
   if (alignment < 0.85) warnings.push(`Only ${Math.round(alignment * 100)}% of the shortest history aligns across the retained assets.`);
   if (suspicious.length) warnings.push(`Large single-day adjusted-price move detected for: ${suspicious.join(', ')}. Verify corporate-action data before relying on this run.`);
   const level = missing.length || stale.length || alignment < 0.85 || suspicious.length ? 'warning' : 'ok';
-  return { level, missing, stale, suspicious, alignment, latestDate, latestAgeDays, retained: histories.length, requested: requestedTickers.length, warnings };
+  return { level, missing, stale, suspicious, alignment, latestDate, latestAgeDays, sources, retained: histories.length, requested: requestedTickers.length, warnings };
 }

@@ -20,6 +20,8 @@
 
 **Market-data quality (Phase 4)** — Before a history enters IndexedDB or the optimisation input, Aurum requires paired chronological ISO dates, at least 30 observations, and finite positive adjusted closes. A malformed history is excluded through the normal per-ticker failure path; the run stops if fewer than two valid histories remain. Completed runs show a local quality summary: retained versus requested assets, common-date freshness, alignment coverage, stale-cache use, and unusually large adjusted-price changes. These are integrity flags, not trading signals; users should verify corporate actions or provider data before relying on a flagged run.
 
+**Provider adapter and fallback** — Yahoo Finance remains Aurum's only live public market-data provider. The ingestion adapter gives it an explicit primary boundary and, if a refreshed request fails or is rate-limited, can fall back only to that browser's already validated IndexedDB history. The results quality panel identifies the source and warns when data is stale. If neither Yahoo nor a validated local record is available, that ticker is excluded and the run fails safely when fewer than two valid histories remain. This design respects Yahoo limits without presenting a stale cache as live data or silently switching vendors.
+
 ---
 
 ## 0. The one idea behind Aurum
