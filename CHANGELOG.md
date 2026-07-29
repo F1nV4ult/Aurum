@@ -6,6 +6,11 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Fixed — Sample portfolio import
+- **Open in Optimizer** now writes the selected sample portfolio to the same session-scoped
+  handoff store consumed by the optimizer. Selected tickers are restored before auto-optimisation
+  instead of navigating to an empty optimizer.
+
 ### Added — Phase 3 reproducible analysis snapshots
 - Introduced the versioned local snapshot model (`components/aurum/snapshots.js`). A snapshot stores
   a validated shareable configuration, save time, source-data date, risk-free rate/source, compact

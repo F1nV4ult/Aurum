@@ -516,14 +516,16 @@ function setupUI() {
     if (selectedId) renderHoldings(portfolioData.portfolios[selectedId], selectedTier);
   });
 
-  // CTA — seed optimizer localStorage before navigating
+  // CTA — seed the optimizer's session-scoped selected-portfolio store before
+  // navigating. The optimiser deliberately restores this key from
+  // sessionStorage, so localStorage would leave the destination with no assets.
   document.getElementById('cta-optimizer-link').addEventListener('click', e => {
     e.preventDefault();
     if (!selectedId) return;
     const portfolio = portfolioData.portfolios[selectedId];
     const tickers   = portfolio.tickers.map(h => h.ticker);
     try {
-      localStorage.setItem('aurum_portfolio_v1', JSON.stringify(tickers));
+      sessionStorage.setItem('aurum_portfolio_v1', JSON.stringify(tickers));
       localStorage.setItem('aurum_autorun_v1', JSON.stringify({ name: portfolio.name }));
     } catch {}
     window.location.href = 'index.html';

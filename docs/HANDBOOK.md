@@ -55,6 +55,11 @@ comparisons calculate metric deltas and rank allocation changes without re-runni
 completed run, use **Save Snapshot** in the results header; select any two saved analyses in the
 **Saved Analysis Comparison** card. Snapshots never leave the current browser unless its local storage is exported.
 
+**Sample portfolio handoff** — Selecting **Open in Optimizer** on the Portfolios page writes the
+sample portfolio's ticker list to the optimizer's session-scoped portfolio key, then navigates to
+the optimizer. The optimizer restores those tickers before consuming the local auto-run notice;
+the imported list therefore remains limited to the current browser session.
+
 ---
 
 ## 1. Architecture at a glance
