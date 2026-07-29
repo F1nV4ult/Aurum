@@ -159,7 +159,26 @@ const TIERS = [1000, 5000, 10000, 25000, 50000, 100000];
 async function main() {
   const raw  = await readFile(join(ROOT, 'data', 'sample-portfolios.json'), 'utf8');
   const data = JSON.parse(raw);
-  const portfolios = data.portfolios;
+  const livePortfolios = data.portfolios;
+  // Dynamic model baskets may change tickers on every scheduled rebuild. Their
+  // validity is tested as data (schema + weights), not against this deliberately
+  // fixed whole-share price fixture.
+  check(Object.keys(livePortfolios).length >= 12, 'Dynamic catalogue has all model portfolios');
+  for (const [id, portfolio] of Object.entries(livePortfolios)) {
+    const weights = portfolio.tickers || [];
+    const total = weights.reduce((sum, holding) => sum + Number(holding.weight || 0), 0);
+    check(weights.length >= 2 && weights.every(h => /^[A-Z0-9.^-]{1,20}$/.test(h.ticker)), `${id}: valid ticker basket`);
+    check(Math.abs(total - 1) <= 5e-4, `${id}: weights sum to 100%`, `sum=${total}`);
+    check(typeof portfolio.category === 'string' && typeof portfolio.risk_level === 'string', `${id}: category metadata present`);
+  }
+  const portfolios = {
+    allocationFixture: {
+      tickers: [
+        { ticker: 'SNAP', weight: 0.35 }, { ticker: 'SOFI', weight: 0.25 },
+        { ticker: 'F', weight: 0.20 }, { ticker: 'WFC', weight: 0.20 },
+      ]
+    }
+  };
 
   // ── 1. residualThreshold values ──────────────────────────────────────────
 

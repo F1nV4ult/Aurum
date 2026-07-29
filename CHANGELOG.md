@@ -6,6 +6,11 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Fixed — Dynamic portfolio allocation validation
+- Allocation tests no longer apply a stale, fixed ticker/price map to dynamically refreshed model baskets.
+  The generated catalogue is validated for ticker, weight, and category invariants, while whole-share
+  allocation remains covered by deterministic fixed-price fixtures.
+
 ### Added — Phase 5 dynamic model-portfolio scheduling
 - The sample-portfolio catalogue now supports category-scoped full re-optimisation. GitHub Actions
   rotates **broad**, **sector**, **thematic**, and **style** model baskets on weekdays, publishing

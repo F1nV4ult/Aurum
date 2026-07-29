@@ -4,6 +4,11 @@
 > model baskets. A GitHub-hosted weekday cron—not a user device—re-optimises broad, sector,
 > thematic and style categories in rotation. This keeps Yahoo-proxy demand bounded and refreshes
 > every category at least weekly. Outputs are not personal recommendations, solicitations, or guarantees.
+>
+> **Dynamic catalogue validation:** Whole-share allocation uses deterministic fixture prices in the
+> offline suite. Generated portfolios are separately checked for valid ticker symbols, normalised
+> weights, and category metadata, so scheduled basket changes do not make the test suite depend on
+> a stale hard-coded market-price list.
 
 > A complete, plain-English map of everything inside Aurum: the optimization engine, the
 > portfolio-theory behind each formula, the data flow, the offline build pipeline, the access/proxy
