@@ -48,6 +48,13 @@ results, account data, cookies, browser storage, API keys, or automatic executio
 the recipient must explicitly run the optimisation against current data. The decoder validates and
 normalises the versioned payload, ignoring malformed or unsupported links safely.
 
+**Local analysis snapshots** — Phase 3 uses browser-local storage for compact reproducibility
+records: validated configuration, save time, source-data date, risk-free rate/source, key metrics,
+and final weights. Raw price histories and full result payloads are deliberately excluded. Snapshot
+comparisons calculate metric deltas and rank allocation changes without re-running optimisation. After a
+completed run, use **Save Snapshot** in the results header; select any two saved analyses in the
+**Saved Analysis Comparison** card. Snapshots never leave the current browser unless its local storage is exported.
+
 ---
 
 ## 1. Architecture at a glance

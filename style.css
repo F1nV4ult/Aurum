@@ -2424,3 +2424,16 @@ input { font-family: var(--font-mono); }
     scroll-behavior: auto !important;
   }
 }
+
+/* Phase 3 — local saved-analysis comparison */
+.snapshot-card { margin-top: 18px; }
+.snapshot-note { margin: 0 0 14px; color: var(--gold-dim); font: 0.66rem/1.5 var(--font-mono); }
+.snapshot-selectors { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.snapshot-selectors label { display: flex; flex: 1 1 260px; flex-direction: column; gap: 6px; color: var(--gold-dim); font: 0.62rem var(--font-mono); }
+.snapshot-selectors select { max-width: 100%; padding: 8px; border: 1px solid #343126; background: #111; color: var(--cream); font: 0.65rem var(--font-mono); }
+.snapshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; overflow-x: auto; }
+.snapshot-grid table { width: 100%; border-collapse: collapse; font: 0.65rem var(--font-mono); }
+.snapshot-grid th, .snapshot-grid td { padding: 8px; border-bottom: 1px solid #27251e; text-align: right; white-space: nowrap; }
+.snapshot-grid th:first-child { text-align: left; color: var(--gold-dim); }
+.snapshot-grid thead th { color: var(--gold); font-weight: 500; }
+@media (max-width: 760px) { .snapshot-grid { grid-template-columns: 1fr; } }

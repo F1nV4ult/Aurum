@@ -1,0 +1,16 @@
+import { createSnapshot, comparison } from '../components/aurum/snapshots.js';
+import { SHARE_VERSION } from '../components/aurum/share.js';
+let passed = 0, failed = 0;
+const check = (ok, name) => { if (ok) { console.log('  ✓  ' + name); passed++; } else { console.error('  ✗  ' + name); failed++; } };
+const config = { v: SHARE_VERSION, t: ['AAPL', 'MSFT'], m: 'maxSharpe', c: { w: 30, s: 40, k: 'ledoitWolf', r: false, b: 'SPY' }, r: { e: false, t: 100, c: 10, h: {} }, q: [] };
+const result = weights => ({ optimal: { return: .12, risk: .18, sharpe: .55, maxDrawdown: .2, cvar95: -.03, divRatio: 1.4, assets: weights.map(([ticker, weight]) => ({ ticker, weight })) } });
+console.log('\nsnapshots');
+const a = createSnapshot({ config, result: result([['AAPL', .6], ['MSFT', .4]]), dataAsOf: '2026-07-29', riskFreeRate: .04, now: '2026-07-29T00:00:00.000Z' });
+const b = createSnapshot({ config, result: { ...result([['AAPL', .4], ['MSFT', .6]]), optimal: { ...result([['AAPL', .4], ['MSFT', .6]]).optimal, sharpe: .75 } }, dataAsOf: '2026-07-30', riskFreeRate: .04, now: '2026-07-30T00:00:00.000Z' });
+check(a?.config.t.length === 2 && a.summary.assets.length === 2, 'stores compact configuration and weights');
+check(a?.dataAsOf === '2026-07-29' && a.riskFreeRate === .04, 'stores reproducibility metadata');
+const diff = comparison(a, b);
+check(Math.abs((diff?.metrics.sharpe.delta || 0) - .2) < 1e-12, 'computes metric deltas');
+check(diff?.weights.length === 2 && diff.weights.every(item => Math.abs(Math.abs(item.delta) - .2) < 1e-12), 'ranks weight changes');
+check(createSnapshot({ config: { ...config, t: [] }, result }) === null, 'rejects invalid configurations');
+console.log(`\n${passed} passed, ${failed} failed`); process.exit(failed ? 1 : 0);

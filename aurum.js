@@ -18,6 +18,7 @@ import { computeBacktest, runMonteCarlo, optimise } from './components/aurum/eng
 import { generateReport } from './components/aurum/exporter.js';
 import { escapeHtml } from './components/aurum/escape.js';
 import { buildShareUrl, readShareState } from './components/aurum/share.js';
+import { createSnapshot, readSnapshots, writeSnapshots, comparison } from './components/aurum/snapshots.js';
 
 // ── Load universe ──────────────────────────────────────────────────────────
 
@@ -174,6 +175,86 @@ function setStatusLoading(msg) { setStatus(msg, 'loading'); }
 function setStatusError(msg)   { setStatus(msg, 'error'); }
 function setStatusOk(msg)      { setStatus(msg, 'success'); }
 function clearStatus()         { setStatus(''); }
+
+// ── Local analysis snapshots ────────────────────────────────────────────────
+// Snapshots deliberately contain only a reproducible configuration and compact
+// result summary. Price histories, credentials and full calculation payloads
+// remain outside browser storage.
+function percent(value, digits = 1) {
+  return Number.isFinite(Number(value)) ? `${(Number(value) * 100).toFixed(digits)}%` : '—';
+}
+function snapshotLabel(snapshot) {
+  const saved = snapshot.savedAt ? new Date(snapshot.savedAt).toLocaleString() : 'Unknown time';
+  const asOf = snapshot.dataAsOf || 'unknown data date';
+  return `${saved} · data ${asOf} · Sharpe ${Number(snapshot.summary?.sharpe || 0).toFixed(2)}`;
+}
+function renderSnapshotPanel() {
+  const card = document.getElementById('snapshot-card');
+  const leftSelect = document.getElementById('snapshot-left');
+  const rightSelect = document.getElementById('snapshot-right');
+  const output = document.getElementById('snapshot-comparison');
+  if (!card || !leftSelect || !rightSelect || !output) return;
+  const snapshots = readSnapshots(localStorage);
+  card.style.display = snapshots.length ? 'block' : 'none';
+  leftSelect.replaceChildren(); rightSelect.replaceChildren();
+  snapshots.forEach(snapshot => {
+    for (const select of [leftSelect, rightSelect]) {
+      const option = document.createElement('option');
+      option.value = snapshot.id;
+      option.textContent = snapshotLabel(snapshot);
+      select.appendChild(option);
+    }
+  });
+  if (snapshots.length > 1) {
+    leftSelect.value = snapshots[1].id;
+    rightSelect.value = snapshots[0].id;
+  }
+  const update = () => {
+    const left = snapshots.find(item => item.id === leftSelect.value);
+    const right = snapshots.find(item => item.id === rightSelect.value);
+    const result = comparison(left, right);
+    if (!result) { output.textContent = ''; return; }
+    const sign = value => value > 0 ? '+' : '';
+    const metricRow = (label, metric, percentValue = true) =>
+      `<tr><th>${label}</th><td>${percentValue ? percent(metric.left) : metric.left?.toFixed?.(2) ?? '—'}</td><td>${percentValue ? percent(metric.right) : metric.right?.toFixed?.(2) ?? '—'}</td><td>${percentValue ? `${sign(metric.delta)}${percent(metric.delta)}` : `${sign(metric.delta)}${metric.delta?.toFixed?.(2) ?? '—'}`}</td></tr>`;
+    const changes = result.weights.slice(0, 5).map(item =>
+      `<tr><th>${escapeHtml(item.ticker)}</th><td>${percent(item.left)}</td><td>${percent(item.right)}</td><td>${sign(item.delta)}${percent(item.delta)}</td></tr>`
+    ).join('');
+    output.innerHTML = `
+      <div class="snapshot-grid">
+        <table><thead><tr><th>Metric</th><th>Earlier</th><th>Later</th><th>Change</th></tr></thead><tbody>
+          ${metricRow('Expected return', result.metrics.return)}
+          ${metricRow('Risk', result.metrics.risk)}
+          ${metricRow('Sharpe', result.metrics.sharpe, false)}
+          ${metricRow('Max drawdown', result.metrics.maxDrawdown)}
+        </tbody></table>
+        <table><thead><tr><th>Largest allocation shifts</th><th>Earlier</th><th>Later</th><th>Change</th></tr></thead><tbody>${changes || '<tr><td colspan="4">No allocation changes.</td></tr>'}</tbody></table>
+      </div>`;
+  };
+  leftSelect.onchange = update;
+  rightSelect.onchange = update;
+  update();
+}
+function saveSnapshot() {
+  if (!_lastOptResult || !alignedData) {
+    setStatusError('Run an optimisation before saving a snapshot.');
+    return;
+  }
+  let riskFreeSource = null;
+  try { riskFreeSource = sessionStorage.getItem('aurum_rf_source'); } catch { /* private mode */ }
+  const snapshot = createSnapshot({
+    config: captureShareState(), result: _lastOptResult,
+    dataAsOf: alignedData.dates.at(-1), riskFreeRate: rf, riskFreeSource,
+  });
+  if (!snapshot) { setStatusError('Could not create a valid analysis snapshot.'); return; }
+  try {
+    writeSnapshots(localStorage, [snapshot, ...readSnapshots(localStorage)]);
+    renderSnapshotPanel();
+    setStatusOk('Analysis snapshot saved locally. Compare it with a later run below.');
+  } catch {
+    setStatusError('Browser storage is unavailable; the snapshot was not saved.');
+  }
+}
 
 // ── Run button ─────────────────────────────────────────────────────────────
 
@@ -796,6 +877,9 @@ async function runOptimisation() {
     if (exportBtn) exportBtn.style.display = 'inline-block';
     const csvBtn = document.getElementById('export-csv-btn');
     if (csvBtn) csvBtn.style.display = 'inline-block';
+    const snapshotBtn = document.getElementById('save-snapshot-btn');
+    if (snapshotBtn) snapshotBtn.style.display = 'inline-block';
+    renderSnapshotPanel();
   };
 
   worker.onerror = (err) => {
@@ -1012,6 +1096,11 @@ function initExportButton() {
     downloadCsv('aurum-backtest.csv', buildBacktestCsv(_lastBtResult, alignedData.dates));
   });
 }
+function initSnapshotControls() {
+  document.getElementById('save-snapshot-btn')?.addEventListener('click', saveSnapshot);
+  document.getElementById('snapshot-refresh-btn')?.addEventListener('click', renderSnapshotPanel);
+  renderSnapshotPanel();
+}
 
 // ── Auto-run from model portfolio ──────────────────────────────────────────
 
@@ -1059,6 +1148,7 @@ async function autoRunFromPortfolio() {
   updateRunButton();
   updateCountLabel();
   initExportButton();
+  initSnapshotControls();
   if (sharedRestored) setStatusOk(`Restored shared portfolio — ${state.selectedTickers.length} positions.`);
   await autoRunFromPortfolio();
 })();

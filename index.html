@@ -256,6 +256,7 @@
           <span>Efficient Frontier</span>
           <div style="display:flex;align-items:center;gap:14px;">
             <span id="data-freshness" class="data-freshness"></span>
+            <button id="save-snapshot-btn" class="export-btn" style="display:none;">Save Snapshot</button>
             <button id="export-btn" class="export-btn" style="display:none;">Export Report</button>
           </div>
         </div>
@@ -338,6 +339,20 @@
 
       <!-- Mode Comparison (auto-populated after every run) -->
       <div class="compare-card" id="compare-card" style="display:none;"></div>
+
+      <!-- Local, compact saved-analysis comparison. No price history is retained. -->
+      <div class="panel-card snapshot-card" id="snapshot-card" style="display:none;">
+        <div class="panel-card-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <span>Saved Analysis Comparison</span>
+          <button id="snapshot-refresh-btn" class="compare-trigger-btn">Refresh</button>
+        </div>
+        <p class="snapshot-note">Snapshots stay in this browser and retain configuration, result metrics, weights, and data date only.</p>
+        <div class="snapshot-selectors">
+          <label>Earlier analysis <select id="snapshot-left"></select></label>
+          <label>Later analysis <select id="snapshot-right"></select></label>
+        </div>
+        <div id="snapshot-comparison"></div>
+      </div>
 
     </div><!-- /results-content -->
   </div><!-- /results-panel -->

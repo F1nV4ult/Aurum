@@ -6,6 +6,14 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Added — Phase 3 reproducible analysis snapshots
+- Introduced the versioned local snapshot model (`components/aurum/snapshots.js`). A snapshot stores
+  a validated shareable configuration, save time, source-data date, risk-free rate/source, compact
+  metrics, and position weights — never raw price history, browser credentials, or API data.
+- Added visible **Save Snapshot** and local comparison controls. Users can select an earlier and later
+  saved analysis to review metric deltas and the five largest allocation changes without re-running
+  optimisation. `scripts/test-snapshots.mjs` covers the stored model and comparison logic.
+
 ### Added — Phase 2 shareable portfolio configurations
 - **Versioned share links** — the explicit **Copy share link** action serialises the selected
   tickers, optimiser mode, constraints, risk model, benchmark, resampling choice, Black-Litterman
