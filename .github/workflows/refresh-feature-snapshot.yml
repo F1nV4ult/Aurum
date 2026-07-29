@@ -1,0 +1,30 @@
+name: Refresh Market Feature Snapshot
+
+on:
+  workflow_dispatch:
+  # Three independent, non-overlapping batches/day. Each batch is at most 24
+  # Yahoo histories, below the proxy's per-minute rate boundary.
+  schedule:
+    - cron: '0 1,9,17 * * *'
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Refresh next bounded market-data cohort
+        env:
+          FEATURE_REFRESH_LIMIT: 24
+        run: node scripts/build-feature-snapshot.mjs
+      - name: Commit feature snapshot
+        run: |
+          git config user.name "Aurum Bot"
+          git config user.email "bot@novasect.space"
+          git add data/model-feature-snapshot.json
+          git diff --cached --quiet || git commit -m "chore: refresh market feature snapshot [automated]"
+          git push

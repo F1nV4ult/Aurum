@@ -1,11 +1,11 @@
-name: Rebuild Sample Portfolios
+name: Refresh Dynamic Model Portfolios
 
 on:
-  # Manual trigger from the Aurum UI or GitHub — runs full MVO rebuild
   workflow_dispatch:
-  # Weekly automatic refresh every Monday 06:00 UTC (after Friday close settles)
+  # Hosted GitHub cron runs regardless of local developer machines. One category
+  # is rebuilt each weekday to remain within the Yahoo proxy's request budget.
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * 1-5'
 
 jobs:
   build:
@@ -14,25 +14,33 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v5
-
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
-
-      # Weekly cron: recompute stats from live prices, keep curated weights intact
-      - name: Refresh portfolio stats (weekly)
+      - name: Select scheduled category
         if: github.event_name == 'schedule'
-        run: node scripts/verify-portfolio-stats.mjs
-
-      # Manual trigger: full MVO rebuild — new weights, new tickers, new stats
-      - name: Full MVO rebuild (manual)
+        id: category
+        run: |
+          case "$(date -u +%u)" in
+            1) echo "category=broad" >> "$GITHUB_OUTPUT" ;;
+            2) echo "category=sector" >> "$GITHUB_OUTPUT" ;;
+            3) echo "category=thematic" >> "$GITHUB_OUTPUT" ;;
+            4) echo "category=style" >> "$GITHUB_OUTPUT" ;;
+            5) echo "category=broad" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - name: Rebuild scheduled model category
+        if: github.event_name == 'schedule'
+        env:
+          PORTFOLIO_CATEGORY: ${{ steps.category.outputs.category }}
+          FETCH_CONCURRENCY: 3
+        run: node scripts/build-portfolios.mjs
+      - name: Full model-catalogue rebuild (manual)
         if: github.event_name == 'workflow_dispatch'
         run: node scripts/build-portfolios.mjs
-
       - name: Commit updated portfolios
         run: |
           git config user.name "Aurum Bot"
           git config user.email "bot@novasect.space"
           git add data/sample-portfolios.json
-          git diff --cached --quiet || git commit -m "chore: rebuild sample-portfolios.json [automated]"
+          git diff --cached --quiet || git commit -m "chore: refresh dynamic model portfolios [automated]"
           git push

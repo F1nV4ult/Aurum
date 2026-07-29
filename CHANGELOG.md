@@ -6,6 +6,11 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Added — Phase 5 dynamic model-portfolio scheduling
+- The sample-portfolio catalogue now supports category-scoped full re-optimisation. GitHub Actions
+  rotates **broad**, **sector**, **thematic**, and **style** model baskets on weekdays, publishing
+  ticker/weight changes independently of any developer machine while limiting Yahoo-proxy bursts.
+
 ### Added — Phase 4 Yahoo data resilience
 - History and benchmark requests now retry bounded transient transport and upstream failures
   (`408`, `425`, `5xx`) with exponential backoff before using the existing stale-cache/error path.

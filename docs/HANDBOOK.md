@@ -1,5 +1,10 @@
 # Aurum — Engine Handbook & Portfolio-Theory Reference
 
+> **Phase 5 model refresh:** The Portfolios page is a catalogue of educational, non-personalised
+> model baskets. A GitHub-hosted weekday cron—not a user device—re-optimises broad, sector,
+> thematic and style categories in rotation. This keeps Yahoo-proxy demand bounded and refreshes
+> every category at least weekly. Outputs are not personal recommendations, solicitations, or guarantees.
+
 > A complete, plain-English map of everything inside Aurum: the optimization engine, the
 > portfolio-theory behind each formula, the data flow, the offline build pipeline, the access/proxy
 > layer, the simplifying assumptions, and a curated reading list.

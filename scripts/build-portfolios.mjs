@@ -32,10 +32,13 @@ const OUTPUT_PATH     = join(ROOT, 'data', 'sample-portfolios.json');
 const PROXY_BASE      = 'https://aurum.novasect.space';
 const RISK_FREE_RATE  = 0.045;   // annualised, update as needed
 const TRADING_DAYS    = 252;
-const FETCH_CONCURRENCY = 8;
+// Keep scheduled work well below the public Yahoo proxy's rate boundary. The
+// category rotation in the workflow is the primary control; this caps bursts.
+const FETCH_CONCURRENCY = Number(process.env.FETCH_CONCURRENCY || 3);
 const MAX_WEIGHT      = 0.12;    // per-asset cap
 const SECTOR_CAP      = 0.35;    // default per-sector cap
 const TARGET_POSITIONS = 20;
+const REQUESTED_CATEGORY = process.env.PORTFOLIO_CATEGORY || null;
 
 // ── Portfolio configurations ───────────────────────────────────────────────
 
@@ -510,9 +513,17 @@ async function main() {
   const universe = rawParsed.tickers;
   console.log(`  ${Object.keys(universe).length} tickers loaded\n`);
 
-  const results = {};
+  // A scheduled category refresh must preserve the other published categories.
+  // A normal/manual run continues to rebuild the complete model catalogue.
+  let results = {};
+  if (REQUESTED_CATEGORY) {
+    const existing = JSON.parse(await readFile(OUTPUT_PATH, 'utf8'));
+    results = existing.portfolios || {};
+    console.log(`Refreshing category: ${REQUESTED_CATEGORY}\n`);
+  }
 
   for (const [type, config] of Object.entries(PORTFOLIO_CONFIGS)) {
+    if (REQUESTED_CATEGORY && config.category !== REQUESTED_CATEGORY) continue;
     console.log(`\n── ${type.toUpperCase()} PORTFOLIO ──────────────────────────`);
 
     // 2. Screen candidates
