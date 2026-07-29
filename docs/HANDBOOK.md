@@ -40,6 +40,14 @@ backtest vs benchmark · walk-forward OOS · Monte-Carlo · 7-mode comparison
 renderer (Chart.js + Canvas heatmap) · #po-card description · exporter (print → PDF)
 ```
 
+**Shareable configuration links** — the explicit **Copy share link** action serialises a versioned
+client-side configuration into the `p` URL parameter. It restores selected tickers, optimisation
+mode, constraints, covariance method, benchmark, resampling choice, Black-Litterman views, and
+optional rebalancing inputs on load, before data ingestion. Links contain no fetched prices,
+results, account data, cookies, browser storage, API keys, or automatic execution instruction;
+the recipient must explicitly run the optimisation against current data. The decoder validates and
+normalises the versioned payload, ignoring malformed or unsupported links safely.
+
 ---
 
 ## 1. Architecture at a glance

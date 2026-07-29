@@ -6,6 +6,17 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Added — Phase 2 shareable portfolio configurations
+- **Versioned share links** — the explicit **Copy share link** action serialises the selected
+  tickers, optimiser mode, constraints, risk model, benchmark, resampling choice, Black-Litterman
+  views, and optional rebalancing inputs into a URL-safe `p` parameter. Opening the link restores
+  the configuration before any market-data request; it never carries prices, results, browser
+  storage, server credentials, or a forced optimisation run.
+- **Defensive codec and regression coverage** — `components/aurum/share.js` validates the v1 schema,
+  bounds numeric fields, filters malformed/unselected holdings and views, limits payload size, and
+  rejects unknown versions. `scripts/test-share.mjs` adds 9 deterministic checks and is part of
+  `npm test` / CI.
+
 ### Fixed — Phase 1 reliability baseline
 - **Walk-forward backtests now support programmatic calls without dates.** The core OOS metrics
   remain available; only the presentation-only monthly-return breakdown is omitted when no complete

@@ -17,6 +17,7 @@ import { showResults, hideResults, drawRebalancing, drawComparePanel, drawBackte
 import { computeBacktest, runMonteCarlo, optimise } from './components/aurum/engine.js';
 import { generateReport } from './components/aurum/exporter.js';
 import { escapeHtml } from './components/aurum/escape.js';
+import { buildShareUrl, readShareState } from './components/aurum/share.js';
 
 // ── Load universe ──────────────────────────────────────────────────────────
 
@@ -49,6 +50,90 @@ function restorePortfolio() {
     tickers.forEach(t => { if (state.universe[t]) state.selectedTickers.push(t); });
   } catch {
     sessionStorage.removeItem(PORTFOLIO_KEY);
+  }
+}
+
+// ── Shareable portfolio state ──────────────────────────────────────────────
+
+function captureShareState() {
+  return {
+    v: 1, t: state.selectedTickers, m: state.optimisationMode,
+    c: {
+      w: Math.round(state.constraints.maxWeight * 100), s: Math.round(state.constraints.sectorCap * 100),
+      k: document.getElementById('cov-method')?.value || 'ledoitWolf',
+      r: document.getElementById('cov-resample')?.checked || false,
+      b: document.getElementById('benchmark-select')?.value || 'SPY',
+    },
+    r: {
+      e: rebalEnabled(), t: parseFloat(document.getElementById('turnover-budget')?.value) || 100,
+      c: parseFloat(document.getElementById('tx-cost-bps')?.value) || 0, h: _holdWeights,
+    },
+    q: state.views,
+  };
+}
+
+function applySharedState(shared) {
+  const tickers = shared.t.filter(t => state.universe[t]);
+  if (!tickers.length) return false;
+  state.selectedTickers.length = 0;
+  state.selectedTickers.push(...tickers);
+  state.views = [];
+  shared.q.forEach(view => addView(view));
+  setMode(shared.m);
+  setConstraint('maxWeight', shared.c.w / 100);
+  setConstraint('sectorCap', shared.c.s / 100);
+  const modeRadio = document.querySelector(`input[name="optMode"][value="${shared.m}"]`);
+  if (modeRadio) modeRadio.checked = true;
+  const maxWeight = document.getElementById('constraint-maxweight');
+  const sectorCap = document.getElementById('constraint-sectorcap');
+  if (maxWeight) maxWeight.value = shared.c.w;
+  if (sectorCap) sectorCap.value = shared.c.s;
+  const maxWeightVal = document.getElementById('maxweight-val');
+  const sectorCapVal = document.getElementById('sectorcap-val');
+  if (maxWeightVal) maxWeightVal.textContent = `${shared.c.w}%`;
+  if (sectorCapVal) sectorCapVal.textContent = `${shared.c.s}%`;
+  const covMethod = document.getElementById('cov-method');
+  const benchmark = document.getElementById('benchmark-select');
+  if (covMethod) covMethod.value = shared.c.k;
+  if (benchmark) benchmark.value = shared.c.b;
+  const resample = document.getElementById('cov-resample');
+  if (resample) resample.checked = shared.c.r;
+  const rebal = document.getElementById('rebal-enable');
+  const rebalControls = document.getElementById('rebal-controls');
+  if (rebal) rebal.checked = shared.r.e;
+  if (rebalControls) rebalControls.style.display = shared.r.e ? 'block' : 'none';
+  const turnover = document.getElementById('turnover-budget');
+  const turnoverVal = document.getElementById('turnover-val');
+  const txCost = document.getElementById('tx-cost-bps');
+  if (turnover) turnover.value = shared.r.t;
+  if (turnoverVal) turnoverVal.textContent = `${shared.r.t}%`;
+  if (txCost) txCost.value = shared.r.c;
+  _holdWeights = { ...shared.r.h };
+  _holdEdited = new Set(Object.keys(_holdWeights));
+  return true;
+}
+
+function restoreShareLink() {
+  const shared = readShareState(window.location.href);
+  if (!shared) return false;
+  const restored = applySharedState(shared);
+  if (restored) setStatusOk(`Restored shared portfolio — ${shared.t.length} positions.`);
+  return restored;
+}
+
+async function copyShareLink() {
+  if (state.selectedTickers.length < state.MIN_TICKERS) {
+    setStatusError('Add at least two positions before creating a share link.');
+    return;
+  }
+  const url = buildShareUrl(captureShareState(), window.location.href);
+  if (!url) { setStatusError('Could not create a valid share link.'); return; }
+  window.history.replaceState(null, '', url);
+  try {
+    await navigator.clipboard.writeText(url);
+    setStatusOk('Share link copied — it restores this portfolio configuration.');
+  } catch {
+    setStatusOk('Share link created in the address bar. Copy it to share this configuration.');
   }
 }
 
@@ -97,6 +182,8 @@ function updateRunButton() {
   if (!btn) return;
   const ready = state.selectedTickers.length >= state.MIN_TICKERS;
   btn.disabled = !ready || state.isRunning;
+  const shareBtn = document.getElementById('share-btn');
+  if (shareBtn) shareBtn.disabled = !ready;
   if (!ready) {
     const need = state.MIN_TICKERS - state.selectedTickers.length;
     setStatus(`Add ${need} more position${need > 1 ? 's' : ''} to optimise.`);
@@ -788,6 +875,7 @@ function initRunButton() {
   const btn = document.getElementById('run-btn');
   if (!btn) return;
   btn.addEventListener('click', () => { if (!btn.disabled) runOptimisation(); });
+  document.getElementById('share-btn')?.addEventListener('click', copyShareLink);
 }
 
 // ── Event subscriptions ────────────────────────────────────────────────────
@@ -953,7 +1041,8 @@ async function autoRunFromPortfolio() {
     return;
   }
 
-  restorePortfolio();
+  const sharedRestored = restoreShareLink();
+  if (!sharedRestored) restorePortfolio();
   initFilterChips();
   initModeRadios();
   initConstraintSliders();
@@ -963,9 +1052,13 @@ async function autoRunFromPortfolio() {
   initRunButton();
   document.getElementById('clear-tickers-btn')?.addEventListener('click', () => clearTickers());
   subscribeStateEvents();
+  const viewsSection = document.getElementById('views-section');
+  if (viewsSection) viewsSection.style.display = state.optimisationMode === 'blackLitterman' ? 'block' : 'none';
   renderPortfolio();
+  renderViews();
   updateRunButton();
   updateCountLabel();
   initExportButton();
+  if (sharedRestored) setStatusOk(`Restored shared portfolio — ${state.selectedTickers.length} positions.`);
   await autoRunFromPortfolio();
 })();
