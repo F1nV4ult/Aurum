@@ -11,7 +11,7 @@
     "build-portfolios": "node scripts/build-portfolios.mjs",
     "build-web": "node scripts/build-web.mjs",
     "verify-build": "node scripts/build-web.mjs --check",
-    "test": "node scripts/test-engine.mjs && node scripts/test-allocation.mjs && node scripts/test-escape.mjs && node scripts/test-edgecases.mjs && node scripts/test-integration.mjs && node scripts/test-covariance.mjs && node scripts/test-resample.mjs && node scripts/test-hrp.mjs && node scripts/test-cvar.mjs && node scripts/test-maxdiv.mjs && node scripts/test-factor.mjs && node scripts/test-turnover.mjs && node scripts/test-walkforward.mjs && node scripts/test-share.mjs && node scripts/test-snapshots.mjs && node scripts/test-ingestion-retry.mjs && node scripts/test-feature-snapshot.mjs"
+    "test": "node scripts/test-engine.mjs && node scripts/test-allocation.mjs && node scripts/test-escape.mjs && node scripts/test-edgecases.mjs && node scripts/test-integration.mjs && node scripts/test-covariance.mjs && node scripts/test-resample.mjs && node scripts/test-hrp.mjs && node scripts/test-cvar.mjs && node scripts/test-maxdiv.mjs && node scripts/test-factor.mjs && node scripts/test-turnover.mjs && node scripts/test-walkforward.mjs && node scripts/test-share.mjs && node scripts/test-snapshots.mjs && node scripts/test-ingestion-retry.mjs && node scripts/test-data-quality.mjs && node scripts/test-feature-snapshot.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.0"

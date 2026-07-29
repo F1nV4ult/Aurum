@@ -6,6 +6,10 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Added — Phase 4 market-data quality layer
+- Incoming price histories now undergo strict date, order, length, and positive-adjusted-close validation before they enter the browser cache or optimiser. Invalid provider data is excluded safely.
+- Each completed run displays retained/missing assets, stale-cache use, latest common date, alignment coverage, and anomalous adjusted-price moves. The deterministic quality checks are included in the offline suite.
+
 ### Fixed — Dynamic portfolio allocation validation
 - Allocation tests no longer apply a stale, fixed ticker/price map to dynamically refreshed model baskets.
   The generated catalogue is validated for ticker, weight, and category invariants, while whole-share

@@ -176,6 +176,19 @@ function setStatusError(msg)   { setStatus(msg, 'error'); }
 function setStatusOk(msg)      { setStatus(msg, 'success'); }
 function clearStatus()         { setStatus(''); }
 
+// ── Market-data quality ────────────────────────────────────────────────────
+function renderDataQuality(quality) {
+  const card = document.getElementById('data-quality-card');
+  if (!card) return;
+  if (!quality) { card.style.display = 'none'; card.replaceChildren(); return; }
+  const warning = quality.level === 'warning';
+  const freshness = quality.latestAgeDays == null ? 'unknown date' : quality.latestAgeDays === 0 ? 'current calendar day' : `${quality.latestAgeDays} calendar day${quality.latestAgeDays === 1 ? '' : 's'} old`;
+  const items = quality.warnings.length ? quality.warnings.map(message => `<li>${escapeHtml(message)}</li>`).join('') : '<li>All retained histories passed validation and share a healthy common date range.</li>';
+  card.className = `data-quality-card ${warning ? 'warning' : 'ok'}`;
+  card.style.display = 'block';
+  card.innerHTML = `<div class="data-quality-head"><span>Market-data quality</span><strong>${warning ? 'Review warnings' : 'Validated'}</strong></div><div class="data-quality-meta">${quality.retained}/${quality.requested} assets retained · latest common date ${escapeHtml(quality.latestDate || '—')} · ${freshness} · ${Math.round(quality.alignment * 100)}% alignment</div><ul>${items}</ul>`;
+}
+
 // ── Local analysis snapshots ────────────────────────────────────────────────
 // Snapshots deliberately contain only a reproducible configuration and compact
 // result summary. Price histories, credentials and full calculation payloads
@@ -750,6 +763,7 @@ async function runOptimisation() {
       setStatusLoading(`Loading data… ${done}/${total}`);
     });
     alignedData = result;
+    renderDataQuality(alignedData.quality);
 
     setStatusLoading('Fetching risk-free rate…');
     const benchSymbol = document.getElementById('benchmark-select')?.value || 'SPY';
@@ -765,6 +779,7 @@ async function runOptimisation() {
     }
 
   } catch (err) {
+    renderDataQuality(null);
     setStatusError(err.message);
     state.isRunning = false;
     updateRunButton();

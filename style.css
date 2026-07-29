@@ -483,6 +483,17 @@ input { font-family: var(--font-mono); }
   text-transform: uppercase;
 }
 
+/* Phase 4 — local market-data validation and provenance summary */
+.data-quality-card { margin: 16px 24px 0; padding: 13px 16px; border: 1px solid #343126; background: #161711; font: 0.66rem/1.5 var(--font-mono); }
+.data-quality-card.ok { border-color: rgba(101, 181, 111, .42); }
+.data-quality-card.warning { border-color: rgba(245, 197, 24, .48); }
+.data-quality-head { display: flex; justify-content: space-between; gap: 12px; color: var(--cream); text-transform: uppercase; letter-spacing: .08em; }
+.data-quality-card.ok .data-quality-head strong { color: var(--green); }
+.data-quality-card.warning .data-quality-head strong { color: var(--gold); }
+.data-quality-meta { margin-top: 5px; color: var(--text-muted); }
+.data-quality-card ul { margin: 8px 0 0; padding-left: 18px; color: var(--gold-dim); }
+.data-quality-card.ok ul { color: var(--text-muted); }
+
 /* Metrics grid */
 .metrics-grid {
   display: grid;

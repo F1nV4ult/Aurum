@@ -18,6 +18,8 @@
 > (b) write much sharper prompts for extending it, and (c) judge which directions are worth taking
 > the project.
 
+**Market-data quality (Phase 4)** — Before a history enters IndexedDB or the optimisation input, Aurum requires paired chronological ISO dates, at least 30 observations, and finite positive adjusted closes. A malformed history is excluded through the normal per-ticker failure path; the run stops if fewer than two valid histories remain. Completed runs show a local quality summary: retained versus requested assets, common-date freshness, alignment coverage, stale-cache use, and unusually large adjusted-price changes. These are integrity flags, not trading signals; users should verify corporate actions or provider data before relying on a flagged run.
+
 ---
 
 ## 0. The one idea behind Aurum

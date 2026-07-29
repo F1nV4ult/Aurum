@@ -19,6 +19,8 @@ const DB_VERSION = 1;
 const STORE_NAME = 'history';
 const CACHE_TTL  = 24 * 60 * 60 * 1000;  // 24h
 const CAP_TTL    =  6 * 60 * 60 * 1000;  // 6h for market caps
+import { assessDataQuality, validateHistory } from './data-quality.js';
+
 const RETRYABLE_STATUS = new Set([408, 425, 500, 502, 503, 504]);
 
 let _db = null;
@@ -78,9 +80,15 @@ async function idbPut(record) {
 }
 
 async function fetchTickerHistory(ticker) {
-  const cached = await idbGet(ticker);
+  let cached = await idbGet(ticker);
+  // Cached records predate this quality layer. Validate them too so a corrupt
+  // IndexedDB value can never reach alignment or the optimisation worker.
+  if (cached) {
+    try { cached = { ...cached, ...validateHistory(ticker, cached.dates, cached.prices) }; }
+    catch { cached = null; }
+  }
   if (cached && typeof cached.fetchedAt === 'number' && (Date.now() - cached.fetchedAt) < CACHE_TTL) {
-    return { ticker, dates: cached.dates, prices: cached.prices };
+    return { ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'cache', stale: false };
   }
 
   let res;
@@ -89,7 +97,7 @@ async function fetchTickerHistory(ticker) {
   } catch (networkErr) {
     if (cached) {
       console.warn(`Network error for ${ticker}; using stale cache (${Math.round((Date.now() - cached.fetchedAt) / 60000)}min old)`);
-      return { ticker, dates: cached.dates, prices: cached.prices };
+      return { ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'stale-cache', stale: true };
     }
     throw new Error(`Network error fetching ${ticker}: ${networkErr.message}`);
   }
@@ -97,20 +105,16 @@ async function fetchTickerHistory(ticker) {
   if (!res.ok) {
     if (cached) {
       console.warn(`Yahoo proxy ${res.status} for ${ticker}; using stale cache`);
-      return { ticker, dates: cached.dates, prices: cached.prices };
+      return { ticker, dates: cached.dates, prices: cached.prices, fetchedAt: cached.fetchedAt, source: 'stale-cache', stale: true };
     }
     throw new Error(`Yahoo proxy returned ${res.status} for ${ticker}`);
   }
 
   const data = await res.json();
-  if (!data.series || data.series.length < 30) {
-    throw new Error(`Insufficient data for ${ticker} (${data.series?.length ?? 0} points)`);
-  }
-
-  const dates  = data.series.map(p => p.date);
-  const prices = data.series.map(p => p.adjClose);
-  await idbPut({ ticker, dates, prices, fetchedAt: Date.now() });
-  return { ticker, dates, prices };
+  const history = validateHistory(ticker, data.series?.map(p => p.date), data.series?.map(p => p.adjClose));
+  const fetchedAt = Date.now();
+  await idbPut({ ...history, fetchedAt });
+  return { ...history, fetchedAt, source: 'live', stale: false };
 }
 
 function alignSeries(histories) {
@@ -203,7 +207,8 @@ export async function fetchAlignedReturns(tickers, onProgress) {
   // Latest adjusted-close price per ticker (last element of each price series)
   const latestPrices = histories.map(h => h.prices[h.prices.length - 1] ?? null);
 
-  return { tickers: validTickers, dates, alignedReturns, latestPrices };
+  const quality = assessDataQuality({ requestedTickers: tickers, histories, failed, dates });
+  return { tickers: validTickers, dates, alignedReturns, latestPrices, quality };
 }
 
 /**
