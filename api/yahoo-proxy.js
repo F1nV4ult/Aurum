@@ -227,7 +227,7 @@ export default async function handler(req, res) {
                 .sort((a, b) => a.date.localeCompare(b.date));
 
             res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate=43200');
-            return res.status(200).json({ symbol, mode: 'history', range: fetchRange, latestDate: latest.date, currentPrice, series, dividends, source: 'Yahoo Finance Live' });
+            return res.status(200).json({ symbol, mode: 'history', range: fetchRange, currency: result.meta?.currency || null, latestDate: latest.date, currentPrice, series, dividends, source: 'Yahoo Finance Live' });
         }
 
         // default: 30-day realised vol

@@ -22,6 +22,8 @@
 
 **Provider adapter and fallback** — Yahoo Finance remains Aurum's only live public market-data provider. The ingestion adapter gives it an explicit primary boundary and, if a refreshed request fails or is rate-limited, can fall back only to that browser's already validated IndexedDB history. The results quality panel identifies the source and warns when data is stale. If neither Yahoo nor a validated local record is available, that ticker is excluded and the run fails safely when fewer than two valid histories remain. This design respects Yahoo limits without presenting a stale cache as live data or silently switching vendors.
 
+**Base-currency scope (Phase 6)** — The user-facing base-currency selector is intentionally limited to **USD, EUR, GBP, and INR**. Other currencies may remain source/listing currencies for supported holdings and are converted into one of those four bases when a validated historical FX path exists; they are not selectable as reporting bases.
+
 ---
 
 ## 0. The one idea behind Aurum
