@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-08-03",
+    "generated": "2026-08-04",
     "refresh_frequency": "weekly",
     "universe_version": "1.0.0",
     "universe_count": 500,
@@ -664,8 +664,8 @@
     },
     "tech-ai": {
       "name": "Tech & AI",
-      "tagline": "Concentrated exposure to technology and AI leadership",
-      "description": "Concentrated across Information Technology and Communication Services, this portfolio targets the highest Sharpe names in semiconductors, cloud, software, and AI infrastructure. Higher volatility in exchange for maximum sector-level growth potential.",
+      "tagline": "Concentrated bet on technology and artificial intelligence",
+      "description": "Concentrated max-Sharpe allocation across Information Technology and Communication Services — the epicentre of AI-driven growth.",
       "objective": "max_sharpe",
       "category": "sector",
       "risk_level": "high",
@@ -677,164 +677,164 @@
       "min_recommended_tier": 5000,
       "tickers": [
         {
-          "ticker": "NVDA",
-          "name": "NVIDIA Corporation",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.1
-        },
-        {
-          "ticker": "MSFT",
-          "name": "Microsoft Corporation",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.09
-        },
-        {
           "ticker": "AAPL",
           "name": "Apple Inc.",
           "sector": "Information Technology",
           "region": "US",
-          "weight": 0.08
+          "weight": 0.1776
         },
         {
-          "ticker": "META",
-          "name": "Meta Platforms Inc.",
-          "sector": "Communication Services",
+          "ticker": "005930.KS",
+          "name": "Samsung Electronics Co. Ltd.",
+          "sector": "Information Technology",
+          "region": "APAC",
+          "weight": 0.1356
+        },
+        {
+          "ticker": "MU",
+          "name": "Micron Technology Inc.",
+          "sector": "Information Technology",
           "region": "US",
-          "weight": 0.07
+          "weight": 0.1131
         },
         {
           "ticker": "GOOGL",
-          "name": "Alphabet Inc.",
+          "name": "Alphabet Inc. Class A",
           "sector": "Communication Services",
           "region": "US",
-          "weight": 0.06
+          "weight": 0.0922
         },
         {
-          "ticker": "AMD",
-          "name": "Advanced Micro Devices Inc.",
-          "sector": "Information Technology",
+          "ticker": "VZ",
+          "name": "Verizon Communications Inc.",
+          "sector": "Communication Services",
           "region": "US",
-          "weight": 0.06
+          "weight": 0.0922
         },
         {
-          "ticker": "ASML",
-          "name": "ASML Holding N.V. (ADR)",
-          "sector": "Information Technology",
+          "ticker": "EA",
+          "name": "Electronic Arts Inc.",
+          "sector": "Communication Services",
+          "region": "US",
+          "weight": 0.0922
+        },
+        {
+          "ticker": "WBD",
+          "name": "Warner Bros. Discovery Inc.",
+          "sector": "Communication Services",
+          "region": "US",
+          "weight": 0.0843
+        },
+        {
+          "ticker": "VOD",
+          "name": "Vodafone Group Plc (ADR)",
+          "sector": "Communication Services",
           "region": "EU",
-          "weight": 0.05
+          "weight": 0.0772
         },
         {
-          "ticker": "NET",
-          "name": "Cloudflare Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "DDOG",
-          "name": "Datadog Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "ARM",
-          "name": "Arm Holdings plc (ADR)",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "CRM",
-          "name": "Salesforce Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "AVGO",
-          "name": "Broadcom Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "TSM",
-          "name": "Taiwan Semiconductor Mfg. (ADR)",
-          "sector": "Information Technology",
-          "region": "APAC",
-          "weight": 0.04
-        },
-        {
-          "ticker": "NFLX",
-          "name": "Netflix Inc.",
+          "ticker": "KDDIY",
+          "name": "KDDI Corporation (ADR)",
           "sector": "Communication Services",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "QCOM",
-          "name": "Qualcomm Incorporated",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "SNPS",
-          "name": "Synopsys Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "INTU",
-          "name": "Intuit Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "ORCL",
-          "name": "Oracle Corporation",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "PLTR",
-          "name": "Palantir Technologies Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
+          "region": "APAC",
+          "weight": 0.0586
         },
         {
           "ticker": "INTC",
           "name": "Intel Corporation",
           "sector": "Information Technology",
           "region": "US",
-          "weight": 0.03
+          "weight": 0.0383
+        },
+        {
+          "ticker": "TLSNY",
+          "name": "Telia Company AB (ADR)",
+          "sector": "Communication Services",
+          "region": "EU",
+          "weight": 0.0212
+        },
+        {
+          "ticker": "NOK",
+          "name": "Nokia Corporation (ADR)",
+          "sector": "Information Technology",
+          "region": "EU",
+          "weight": 0.0175
+        },
+        {
+          "ticker": "MSFT",
+          "name": "Microsoft Corporation",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVIDIA Corporation",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "AVGO",
+          "name": "Broadcom Inc.",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "TSM",
+          "name": "Taiwan Semiconductor Mfg. (ADR)",
+          "sector": "Information Technology",
+          "region": "APAC",
+          "weight": 0
+        },
+        {
+          "ticker": "ORCL",
+          "name": "Oracle Corporation",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "ASML",
+          "name": "ASML Holding N.V. (ADR)",
+          "sector": "Information Technology",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "SAP",
+          "name": "SAP SE (ADR)",
+          "sector": "Information Technology",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "CRM",
+          "name": "Salesforce Inc.",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.1883,
-        "volatility": 0.2407,
-        "sharpe": 0.595,
-        "max_drawdown": -0.198,
-        "beta": 1.61
+        "expected_return": 0.8159,
+        "volatility": 0.1971,
+        "sharpe": 3.912,
+        "max_drawdown": -0.394,
+        "beta": 1.09
       },
       "region_split": {
-        "US": 0.91,
-        "EU": 0.05,
-        "APAC": 0.04,
+        "US": 0.6898,
+        "EU": 0.116,
+        "APAC": 0.1942,
         "EM": 0
       }
     },
     "healthcare": {
-      "name": "Healthcare & Biotech",
-      "tagline": "Defensive growth anchored in health care innovation",
-      "description": "Spans pharma, biotech, and medical devices across global leaders. Benefits from aging demographics and drug innovation cycles while maintaining lower correlation to broad market swings than pure growth portfolios.",
+      "name": "Healthcare",
+      "tagline": "Healthcare and biotech with defensive characteristics",
+      "description": "Max-Sharpe portfolio concentrated in Health Care — pharmaceuticals, biotech, and medical devices — blending growth with defensive income.",
       "objective": "max_sharpe",
       "category": "sector",
       "risk_level": "medium",
@@ -850,124 +850,152 @@
           "name": "Eli Lilly and Company",
           "sector": "Health Care",
           "region": "US",
-          "weight": 0.12
-        },
-        {
-          "ticker": "NVO",
-          "name": "Novo Nordisk A/S (ADR)",
-          "sector": "Health Care",
-          "region": "EU",
-          "weight": 0.11
-        },
-        {
-          "ticker": "ABBV",
-          "name": "AbbVie Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.1
-        },
-        {
-          "ticker": "JNJ",
-          "name": "Johnson & Johnson",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.09
+          "weight": 0.1667
         },
         {
           "ticker": "UNH",
           "name": "UnitedHealth Group Inc.",
           "sector": "Health Care",
           "region": "US",
-          "weight": 0.08
-        },
-        {
-          "ticker": "VRTX",
-          "name": "Vertex Pharmaceuticals Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.07
-        },
-        {
-          "ticker": "AMGN",
-          "name": "Amgen Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.06
+          "weight": 0.1667
         },
         {
           "ticker": "MRK",
           "name": "Merck & Co. Inc.",
           "sector": "Health Care",
           "region": "US",
-          "weight": 0.06
+          "weight": 0.1667
         },
         {
-          "ticker": "TMO",
-          "name": "Thermo Fisher Scientific Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "ISRG",
-          "name": "Intuitive Surgical Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "REGN",
-          "name": "Regeneron Pharmaceuticals",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "AZN",
-          "name": "AstraZeneca plc (ADR)",
+          "ticker": "GSK",
+          "name": "GSK plc (ADR)",
           "sector": "Health Care",
           "region": "EU",
-          "weight": 0.04
-        },
-        {
-          "ticker": "DHR",
-          "name": "Danaher Corporation",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "BMY",
-          "name": "Bristol-Myers Squibb Company",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "GILD",
-          "name": "Gilead Sciences Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0.03
+          "weight": 0.1667
         },
         {
           "ticker": "RHHBY",
           "name": "Roche Holding AG (ADR)",
           "sector": "Health Care",
           "region": "EU",
-          "weight": 0.03
+          "weight": 0.1667
+        },
+        {
+          "ticker": "BAYRY",
+          "name": "Bayer AG (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0.1667
+        },
+        {
+          "ticker": "ABBV",
+          "name": "AbbVie Inc.",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "PFE",
+          "name": "Pfizer Inc.",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "TMO",
+          "name": "Thermo Fisher Scientific Inc.",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "ABT",
+          "name": "Abbott Laboratories",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "DHR",
+          "name": "Danaher Corporation",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "GILD",
+          "name": "Gilead Sciences Inc.",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "SYK",
+          "name": "Stryker Corporation",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "BSX",
+          "name": "Boston Scientific Corporation",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "MDT",
+          "name": "Medtronic plc",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
+        },
+        {
+          "ticker": "NVO",
+          "name": "Novo Nordisk A/S (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "AZN",
+          "name": "AstraZeneca PLC (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "SNY",
+          "name": "Sanofi S.A. (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "PHG",
+          "name": "Koninklijke Philips N.V. (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "TAK",
+          "name": "Takeda Pharmaceutical Company Ltd. (ADR)",
+          "sector": "Health Care",
+          "region": "APAC",
+          "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.1884,
-        "volatility": 0.1866,
-        "sharpe": 0.768,
-        "max_drawdown": -0.132,
-        "beta": 0.44
+        "expected_return": 0.4684,
+        "volatility": 0.2118,
+        "sharpe": 1.999,
+        "max_drawdown": -0.424,
+        "beta": 1.18
       },
       "region_split": {
-        "US": 0.82,
-        "EU": 0.18,
+        "US": 0.5,
+        "EU": 0.5,
         "APAC": 0,
         "EM": 0
       }
