@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-08-04",
+    "generated": "2026-08-05",
     "refresh_frequency": "weekly",
     "universe_version": "1.0.0",
     "universe_count": 500,
@@ -1312,8 +1312,8 @@
     },
     "dividend": {
       "name": "Dividend Income",
-      "tagline": "Yield-first allocation across high-payout sectors",
-      "description": "Concentrates on companies with consistent and substantial dividend histories across telecoms, energy, utilities, and consumer staples. Prioritises income generation and capital preservation over appreciation — suited for lower-risk, income-oriented investors.",
+      "tagline": "Low-volatility income from high-dividend sectors",
+      "description": "Min-variance portfolio screened across traditionally high-dividend-paying GICS sectors: Staples, Utilities, Energy, Comms, Health Care, and Financials.",
       "objective": "min_variance",
       "category": "thematic",
       "risk_level": "low",
@@ -1325,150 +1325,164 @@
       "min_recommended_tier": 2000,
       "tickers": [
         {
-          "ticker": "T",
-          "name": "AT&T Inc.",
-          "sector": "Communication Services",
-          "region": "US",
-          "weight": 0.11
-        },
-        {
-          "ticker": "VZ",
-          "name": "Verizon Communications Inc.",
-          "sector": "Communication Services",
-          "region": "US",
-          "weight": 0.1
-        },
-        {
-          "ticker": "MO",
-          "name": "Altria Group Inc.",
+          "ticker": "KO",
+          "name": "The Coca-Cola Company",
           "sector": "Consumer Staples",
           "region": "US",
-          "weight": 0.09
+          "weight": 0.1327
         },
         {
-          "ticker": "PM",
-          "name": "Philip Morris International",
-          "sector": "Consumer Staples",
+          "ticker": "BRK-B",
+          "name": "Berkshire Hathaway Inc. Class B",
+          "sector": "Financials",
           "region": "US",
-          "weight": 0.08
+          "weight": 0.1027
         },
         {
-          "ticker": "XOM",
-          "name": "Exxon Mobil Corporation",
-          "sector": "Energy",
+          "ticker": "TD",
+          "name": "Toronto-Dominion Bank",
+          "sector": "Financials",
           "region": "US",
-          "weight": 0.07
-        },
-        {
-          "ticker": "CVX",
-          "name": "Chevron Corporation",
-          "sector": "Energy",
-          "region": "US",
-          "weight": 0.07
+          "weight": 0.1027
         },
         {
           "ticker": "JNJ",
           "name": "Johnson & Johnson",
           "sector": "Health Care",
           "region": "US",
-          "weight": 0.06
+          "weight": 0.09
         },
         {
-          "ticker": "KO",
-          "name": "The Coca-Cola Company",
+          "ticker": "KR",
+          "name": "The Kroger Co.",
           "sector": "Consumer Staples",
           "region": "US",
-          "weight": 0.06
+          "weight": 0.0782
         },
         {
-          "ticker": "ABBV",
-          "name": "AbbVie Inc.",
+          "ticker": "CB",
+          "name": "Chubb Limited",
+          "sector": "Financials",
+          "region": "US",
+          "weight": 0.078
+        },
+        {
+          "ticker": "COST",
+          "name": "Costco Wholesale Corporation",
+          "sector": "Consumer Staples",
+          "region": "US",
+          "weight": 0.0759
+        },
+        {
+          "ticker": "MS",
+          "name": "Morgan Stanley",
+          "sector": "Financials",
+          "region": "US",
+          "weight": 0.0493
+        },
+        {
+          "ticker": "NSRGY",
+          "name": "Nestlé S.A. (OTC ADR)",
+          "sector": "Consumer Staples",
+          "region": "EU",
+          "weight": 0.0405
+        },
+        {
+          "ticker": "TMO",
+          "name": "Thermo Fisher Scientific Inc.",
           "sector": "Health Care",
           "region": "US",
-          "weight": 0.05
+          "weight": 0.0396
+        },
+        {
+          "ticker": "MO",
+          "name": "Altria Group Inc.",
+          "sector": "Consumer Staples",
+          "region": "US",
+          "weight": 0.0388
+        },
+        {
+          "ticker": "GOOGL",
+          "name": "Alphabet Inc. Class A",
+          "sector": "Communication Services",
+          "region": "US",
+          "weight": 0.0371
+        },
+        {
+          "ticker": "GS",
+          "name": "The Goldman Sachs Group Inc.",
+          "sector": "Financials",
+          "region": "US",
+          "weight": 0.0371
+        },
+        {
+          "ticker": "META",
+          "name": "Meta Platforms Inc.",
+          "sector": "Communication Services",
+          "region": "US",
+          "weight": 0.0296
+        },
+        {
+          "ticker": "BSX",
+          "name": "Boston Scientific Corporation",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0.0285
+        },
+        {
+          "ticker": "UBS",
+          "name": "UBS Group AG",
+          "sector": "Financials",
+          "region": "EU",
+          "weight": 0.022
         },
         {
           "ticker": "PFE",
           "name": "Pfizer Inc.",
           "sector": "Health Care",
           "region": "US",
-          "weight": 0.05
+          "weight": 0.0123
         },
         {
-          "ticker": "SO",
-          "name": "The Southern Company",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "NEE",
-          "name": "NextEra Energy Inc.",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "IBM",
-          "name": "International Business Machines Corp.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "D",
-          "name": "Dominion Energy Inc.",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "WEC",
-          "name": "WEC Energy Group Inc.",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "PG",
-          "name": "Procter & Gamble Co.",
-          "sector": "Consumer Staples",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "RHHBY",
-          "name": "Roche Holding AG (ADR)",
+          "ticker": "UNH",
+          "name": "UnitedHealth Group Inc.",
           "sector": "Health Care",
-          "region": "EU",
-          "weight": 0.03
+          "region": "US",
+          "weight": 0.0038
         },
         {
-          "ticker": "O",
-          "name": "Realty Income Corporation",
-          "sector": "Real Estate",
+          "ticker": "SCHW",
+          "name": "The Charles Schwab Corporation",
+          "sector": "Financials",
           "region": "US",
-          "weight": 0.02
+          "weight": 0.0014
+        },
+        {
+          "ticker": "LLY",
+          "name": "Eli Lilly and Company",
+          "sector": "Health Care",
+          "region": "US",
+          "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.1914,
-        "volatility": 0.1285,
-        "sharpe": 1.139,
-        "max_drawdown": -0.076,
-        "beta": -0.22
+        "expected_return": 0.2075,
+        "volatility": 0.0875,
+        "sharpe": 1.857,
+        "max_drawdown": -0.175,
+        "beta": 0.49
       },
       "region_split": {
-        "US": 0.97,
-        "EU": 0.03,
+        "US": 0.9375,
+        "EU": 0.0625,
         "APAC": 0,
         "EM": 0
       }
     },
     "global-div": {
       "name": "Global Diversified",
-      "tagline": "Broad international exposure beyond US markets",
-      "description": "Over 85% allocated outside the United States across European, Asia-Pacific, and Emerging Market leaders. Provides currency diversification and exposure to growth cycles uncorrelated with US equity markets. Best for investors seeking to reduce US home bias.",
+      "tagline": "Globally diversified portfolio with ≥40% non-US exposure",
+      "description": "Max-Sharpe broad portfolio biased toward international equities. Iterates until at least 40% of portfolio weight comes from non-US tickers.",
       "objective": "max_sharpe",
       "category": "thematic",
       "risk_level": "medium",
@@ -1480,144 +1494,158 @@
       "min_recommended_tier": 5000,
       "tickers": [
         {
-          "ticker": "TSM",
-          "name": "Taiwan Semiconductor Mfg. (ADR)",
-          "sector": "Information Technology",
-          "region": "APAC",
-          "weight": 0.11
-        },
-        {
-          "ticker": "ASML",
-          "name": "ASML Holding N.V. (ADR)",
-          "sector": "Information Technology",
-          "region": "EU",
-          "weight": 0.1
-        },
-        {
-          "ticker": "NVO",
-          "name": "Novo Nordisk A/S (ADR)",
+          "ticker": "GSK",
+          "name": "GSK plc (ADR)",
           "sector": "Health Care",
           "region": "EU",
-          "weight": 0.09
+          "weight": 0.12
         },
         {
-          "ticker": "SAP",
-          "name": "SAP SE (ADR)",
-          "sector": "Information Technology",
+          "ticker": "HSBC",
+          "name": "HSBC Holdings plc (ADR)",
+          "sector": "Financials",
           "region": "EU",
-          "weight": 0.08
+          "weight": 0.12
+        },
+        {
+          "ticker": "2222.SR",
+          "name": "Saudi Arabian Oil Co. (Aramco)",
+          "sector": "Energy",
+          "region": "EM",
+          "weight": 0.12
+        },
+        {
+          "ticker": "BUD",
+          "name": "Anheuser-Busch InBev SA/NV (ADR)",
+          "sector": "Consumer Staples",
+          "region": "EU",
+          "weight": 0.1192
+        },
+        {
+          "ticker": "PBR",
+          "name": "Petróleo Brasileiro S.A. (ADR)",
+          "sector": "Energy",
+          "region": "EM",
+          "weight": 0.1143
+        },
+        {
+          "ticker": "BP",
+          "name": "BP p.l.c. (ADR)",
+          "sector": "Energy",
+          "region": "EU",
+          "weight": 0.1033
+        },
+        {
+          "ticker": "005930.KS",
+          "name": "Samsung Electronics Co. Ltd.",
+          "sector": "Information Technology",
+          "region": "APAC",
+          "weight": 0.0893
         },
         {
           "ticker": "RHHBY",
           "name": "Roche Holding AG (ADR)",
           "sector": "Health Care",
           "region": "EU",
-          "weight": 0.07
+          "weight": 0.0662
         },
         {
-          "ticker": "NSRGY",
-          "name": "Nestlé S.A. (ADR)",
-          "sector": "Consumer Staples",
+          "ticker": "VOLV-B.ST",
+          "name": "Volvo AB Class B",
+          "sector": "Industrials",
           "region": "EU",
-          "weight": 0.07
+          "weight": 0.0472
         },
         {
-          "ticker": "AZN",
-          "name": "AstraZeneca plc (ADR)",
+          "ticker": "ASML",
+          "name": "ASML Holding N.V. (ADR)",
+          "sector": "Information Technology",
+          "region": "EU",
+          "weight": 0.0414
+        },
+        {
+          "ticker": "NOK",
+          "name": "Nokia Corporation (ADR)",
+          "sector": "Information Technology",
+          "region": "EU",
+          "weight": 0.032
+        },
+        {
+          "ticker": "NVS",
+          "name": "Novartis AG (ADR)",
           "sector": "Health Care",
           "region": "EU",
-          "weight": 0.06
+          "weight": 0.0271
+        },
+        {
+          "ticker": "TSM",
+          "name": "Taiwan Semiconductor Mfg. (ADR)",
+          "sector": "Information Technology",
+          "region": "APAC",
+          "weight": 0
+        },
+        {
+          "ticker": "SAP",
+          "name": "SAP SE (ADR)",
+          "sector": "Information Technology",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "INFY",
+          "name": "Infosys Ltd (ADR)",
+          "sector": "Information Technology",
+          "region": "EM",
+          "weight": 0
         },
         {
           "ticker": "SONY",
           "name": "Sony Group Corporation (ADR)",
-          "sector": "Consumer Discretionary",
-          "region": "APAC",
-          "weight": 0.06
-        },
-        {
-          "ticker": "PDD",
-          "name": "PDD Holdings Inc. (ADR)",
-          "sector": "Consumer Discretionary",
-          "region": "EM",
-          "weight": 0.05
-        },
-        {
-          "ticker": "BABA",
-          "name": "Alibaba Group Holding (ADR)",
-          "sector": "Consumer Discretionary",
-          "region": "EM",
-          "weight": 0.05
-        },
-        {
-          "ticker": "TM",
-          "name": "Toyota Motor Corporation (ADR)",
-          "sector": "Consumer Discretionary",
-          "region": "APAC",
-          "weight": 0.04
-        },
-        {
-          "ticker": "BHP",
-          "name": "BHP Group (ADR)",
-          "sector": "Materials",
-          "region": "APAC",
-          "weight": 0.04
-        },
-        {
-          "ticker": "SE",
-          "name": "Sea Limited (ADR)",
-          "sector": "Consumer Discretionary",
-          "region": "APAC",
-          "weight": 0.04
-        },
-        {
-          "ticker": "MSFT",
-          "name": "Microsoft Corporation",
           "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
+          "region": "APAC",
+          "weight": 0
         },
         {
-          "ticker": "AAPL",
-          "name": "Apple Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "GOOGL",
-          "name": "Alphabet Inc.",
-          "sector": "Communication Services",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "JNJ",
-          "name": "Johnson & Johnson",
+          "ticker": "NVO",
+          "name": "Novo Nordisk A/S (ADR)",
           "sector": "Health Care",
-          "region": "US",
-          "weight": 0.03
+          "region": "EU",
+          "weight": 0
         },
         {
-          "ticker": "KO",
-          "name": "The Coca-Cola Company",
-          "sector": "Consumer Staples",
-          "region": "US",
-          "weight": 0.02
+          "ticker": "AZN",
+          "name": "AstraZeneca PLC (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "SNY",
+          "name": "Sanofi S.A. (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "UBS",
+          "name": "UBS Group AG",
+          "sector": "Financials",
+          "region": "EU",
+          "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.1171,
-        "volatility": 0.1772,
-        "sharpe": 0.407,
-        "max_drawdown": -0.154,
-        "beta": 1.11
+        "expected_return": 0.6719,
+        "volatility": 0.1445,
+        "sharpe": 4.34,
+        "max_drawdown": -0.289,
+        "beta": 0.8
       },
       "region_split": {
-        "US": 0.14,
-        "EU": 0.47,
-        "APAC": 0.29,
-        "EM": 0.1
+        "US": 0,
+        "EU": 0.6764,
+        "APAC": 0.0893,
+        "EM": 0.2343
       }
     },
     "quality": {
