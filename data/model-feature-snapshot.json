@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "generatedAt": "2026-08-07T10:04:04.958Z",
+  "generatedAt": "2026-08-07T17:50:55.985Z",
   "assets": {
     "005930.KS": {
       "fetchedAt": "2026-07-29T06:05:53.105Z",
@@ -119170,7 +119170,7 @@
       "KYOCY",
       "LGCLF",
       "LGEAF",
-      "LIN"
+      "LLOY"
     ],
     "failed": [
       "AJINY",
@@ -119195,10 +119195,11 @@
       "IAC",
       "KYOCY",
       "LGCLF",
-      "LGEAF"
+      "LGEAF",
+      "LLOY"
     ],
     "requested": 24,
-    "succeeded": 1,
+    "succeeded": 0,
     "source": "Yahoo Finance via Aurum proxy"
   }
 }
