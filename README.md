@@ -2,8 +2,9 @@
 
 **An open, browser-based portfolio-optimization engine.** Pick equities from a curated
 ~500-name global universe; Aurum runs institutional-style mean-variance optimization (and six
-sibling strategies) entirely client-side and returns optimal weights, risk analytics, a backtest,
-a Monte-Carlo projection, a correlation map, and a printable PDF report.
+sibling strategies) entirely client-side and returns optimal weights, risk analytics, in-sample and
+walk-forward backtests, an analytical Monte-Carlo projection, a correlation map, saved local
+snapshots, shareable configurations, and a printable PDF report.
 
 🌐 **Live:** [aurum.novasect.space](https://aurum.novasect.space) · an instrument of
 [NovaSect](https://novasect.space)
@@ -37,6 +38,10 @@ a Monte-Carlo projection, a correlation map, and a printable PDF report.
   rebalancing** by investment tier, and **turnover-aware rebalancing** (cap turnover toward a target
   from current holdings; report the proportional trading-cost drag).
 - 12 **pre-built model portfolios** (`portfolios.html`), refreshed weekly.
+- **Reproducible workflows and data safeguards** — versioned share links restore configuration only;
+  compact saved analyses remain browser-local; validated market histories, rate-limit-aware retries,
+  and clearly labelled stale-cache fallback protect the live-data path. Reporting bases are USD, EUR,
+  GBP and INR when a validated historical FX path is available.
 
 ## Stack
 

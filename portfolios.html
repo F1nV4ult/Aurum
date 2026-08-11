@@ -37,9 +37,9 @@
   <div class="portfolios-hero">
     <h1>Sample Portfolios</h1>
     <p class="hero-sub">
-      12 pre-optimised strategies built from the 500-ticker Aurum universe —
-      broad market, sector-focused, thematic, and style-based.
-      Select a portfolio to see live share counts at your investment amount.
+      12 scheduled, pre-optimised strategies built from the 500-ticker Aurum universe —
+      broad market, sector-focused, thematic, and style-based. Weights refresh by category at
+      least weekly; select a portfolio to see live share counts at your investment amount.
     </p>
   </div>
 
@@ -167,7 +167,7 @@
     <div class="footer-refresh-row">
       <span id="refresh-date">Portfolio weights last updated: —</span>
     </div>
-    <span>Prices fetched live on page load · Whole-share allocation only · Cash remainder is uninvested</span>
+    <span>Prices fetched live on page load · validated local fallback only when live data fails · whole-share allocation · cash remainder is uninvested</span>
   </div>
 
 </main>
@@ -179,7 +179,7 @@
     <div class="legal-body">
       <p>For informational and educational purposes only. Nothing on this platform constitutes financial, investment, tax, or legal advice, nor a solicitation or recommendation to buy or sell any security. Aurum is an instrument of NovaSect, which is not a registered investment adviser, broker-dealer, or financial planning firm under any applicable securities law or regulation.</p>
       <p>Sample portfolio allocations are pre-optimised mathematical models derived from historical price data and are not investment recommendations. Expected returns, volatility estimates, and Sharpe ratios are statistical projections only and are not guarantees of future performance. Share counts are computed from live market prices and reflect whole-share rounding only; actual investment costs will vary. Past performance does not guarantee future results. All investments involve risk, including the possible loss of principal.</p>
-      <p>Price and market data is sourced from Yahoo Finance and other third-party providers. NovaSect does not guarantee the accuracy, completeness, or timeliness of any data displayed. Portfolio weights are refreshed periodically and may not reflect current market conditions. This platform is provided free of charge. NovaSect assumes no liability for any investment or other decisions made based on information provided herein. NovaSect holds no positions in any securities displayed and receives no compensation from any covered entity.</p>
+      <p>Price and market data is sourced from Yahoo Finance and FRED through Aurum&rsquo;s proxies. Histories are checked for valid dates, sufficient observations and positive adjusted closes; on a live-provider failure only an already validated local cache may be used and it is labelled as stale. Portfolio categories are refreshed on a scheduled rotation and may not reflect current market conditions. This platform is provided free of charge. NovaSect assumes no liability for any investment or other decisions made based on information provided herein. NovaSect holds no positions in any securities displayed and receives no compensation from any covered entity.</p>
       <p>Use of this platform constitutes acknowledgement of these terms. Always consult a qualified financial adviser before making investment decisions.</p>
     </div>
   </div>

@@ -24,6 +24,12 @@
 
 **Base-currency scope (Phase 6)** — The user-facing base-currency selector is intentionally limited to **USD, EUR, GBP, and INR**. Other currencies may remain source/listing currencies for supported holdings and are converted into one of those four bases when a validated historical FX path exists; they are not selectable as reporting bases.
 
+**FX normalisation contract** — Aurum converts a local-currency history only when every retained date
+has a finite positive matching FX observation. For a source currency `c` and selected reporting base
+`b`, the aligned price series is `P_b(t) = P_c(t) × FX_{c/b}(t)` (or the identity rate of 1 when
+`c = b`). A missing or invalid rate excludes that history through the normal validation path; it is
+never filled with a guessed spot rate. The result records the source pair, last rate and last FX date.
+
 ---
 
 ## 0. The one idea behind Aurum
@@ -418,17 +424,19 @@ None of these are bugs — they're the v1 scope, and each is a clean place to ad
   `.min` outputs** (Vercel does no build).
 
 ### Natural next directions (impact-for-effort)
-1. **Shareable / saved portfolios** — URL-hash state (selection + mode + constraints + benchmark) so a
-   config is linkable and restorable.
-2. **Sensitivity / scenario tools** (sweep λ, constraints, risk-free → a Sharpe/return surface).
-3. **GARCH conditional covariance** to complement the sample / Ledoit-Wolf / EWMA estimators.
-4. **Sector / cardinality constraints** (min/max per sector, a cap on the number of holdings).
-5. **Simulated (path-based) Monte Carlo** to relax the lognormal-i.i.d. assumption of the analytical fan.
-6. **Multi-period / tax-aware rebalancing** building on the current single-period turnover control.
+1. **Sensitivity / scenario tools** (sweep λ, constraints, risk-free → a Sharpe/return surface).
+2. **GARCH conditional covariance** to complement the sample / Ledoit-Wolf / EWMA estimators.
+3. **Sector / cardinality constraints** (min/max per sector, a cap on the number of holdings).
+4. **Simulated (path-based) Monte Carlo** to relax the lognormal-i.i.d. assumption of the analytical fan.
+5. **Multi-period / tax-aware rebalancing** building on the current single-period turnover control.
+6. **Provider diversification only with a comparable validation contract**—never a silent switch that
+   could blend incompatible adjusted-price histories.
 
 *Already shipped since v1: Ledoit-Wolf + EWMA covariance, Michaud resampling, HRP, Min-CVaR, Max-
 Diversification, PCA factor risk, turnover-aware rebalancing, walk-forward OOS backtest, a selectable
-benchmark, and the seven-mode comparison.*
+benchmark, seven-mode comparison, browser-local saved analyses, versioned share links, scheduled model
+portfolio refreshes, data-quality gating, provider-aware retry/stale fallback and constrained FX
+normalisation.*
 
 ---
 
