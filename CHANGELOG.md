@@ -6,6 +6,9 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Improved — Premium landing-page treatment
+- Replaced the outlined ambient circles with reduced-motion-aware translucent liquid forms, and refined the hero typography and key surfaces with a restrained metallic-gold finish.
+
 ### Added — Guided landing page
 - Root visits now enter a product landing page with model-portfolio and custom-analysis paths, a short tutorial, feature overview, and direct access to the optimiser. The page uses Aurum's black-and-gold design system with restrained, reduced-motion-aware ambient animation.
 - The optimiser remains available at `/optimizer`; legacy root share URLs containing a `p` configuration parameter redirect there before the landing page renders.

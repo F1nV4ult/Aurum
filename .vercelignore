@@ -14,6 +14,7 @@ scripts/
 /portfolios.js
 /style.css
 /landing.css
+/landing-premium.css
 components/aurum/state.js
 components/aurum/ingestion.js
 components/aurum/renderer.js

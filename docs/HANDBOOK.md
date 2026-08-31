@@ -94,7 +94,7 @@ than treating Yahoo as a replaceable provider.
 
 ```
 (repo root = the deployed static site; outputDirectory ".")
-  landing.html     ← first-visit product landing page (served at `/`)
+  landing.html     ← first-visit product landing page (served at `/`; decorative liquid effects are local, reduced-motion-aware presentation only)
   index.html       ← the optimizer (open access, no auth gate)
   portfolios.html  ← 12 pre-built model portfolios + whole-share allocation
   privacy.html

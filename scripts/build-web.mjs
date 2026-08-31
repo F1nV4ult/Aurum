@@ -68,6 +68,7 @@ console.log(CHECK ? 'Verifying committed .min outputs match source…' : 'Buildi
 for (const t of targets) await emit({ ...common, entryPoints: [t.entry] }, t.out, t.entry);
 await emit({ entryPoints: ['style.css'], minify: true, sourcemap: false, loader: { '.css': 'css' } }, 'style.min.css', 'style.css');
 await emit({ entryPoints: ['landing.css'], minify: true, sourcemap: false, loader: { '.css': 'css' } }, 'landing.min.css', 'landing.css');
+await emit({ entryPoints: ['landing-premium.css'], minify: true, sourcemap: false, loader: { '.css': 'css' } }, 'landing-premium.min.css', 'landing-premium.css');
 
 if (CHECK) {
   if (mismatches.length) {
