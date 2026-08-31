@@ -67,6 +67,7 @@ async function emit(opts, outPath, label) {
 console.log(CHECK ? 'Verifying committed .min outputs match source…' : 'Building…');
 for (const t of targets) await emit({ ...common, entryPoints: [t.entry] }, t.out, t.entry);
 await emit({ entryPoints: ['style.css'], minify: true, sourcemap: false, loader: { '.css': 'css' } }, 'style.min.css', 'style.css');
+await emit({ entryPoints: ['landing.css'], minify: true, sourcemap: false, loader: { '.css': 'css' } }, 'landing.min.css', 'landing.css');
 
 if (CHECK) {
   if (mismatches.length) {

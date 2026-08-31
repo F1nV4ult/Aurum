@@ -4,6 +4,8 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "routes": [
+    { "src": "/", "dest": "/landing.html" },
+    { "src": "/optimizer", "dest": "/index.html" },
     { "src": "/api/(.*)", "dest": "/api/$1" }
   ],
   "headers": [

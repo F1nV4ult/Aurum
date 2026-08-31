@@ -6,6 +6,10 @@ architectural decisions lives in [`docs/adr/`](docs/adr/).
 
 ## [Unreleased]
 
+### Added — Guided landing page
+- Root visits now enter a product landing page with model-portfolio and custom-analysis paths, a short tutorial, feature overview, and direct access to the optimiser. The page uses Aurum's black-and-gold design system with restrained, reduced-motion-aware ambient animation.
+- The optimiser remains available at `/optimizer`; legacy root share URLs containing a `p` configuration parameter redirect there before the landing page renders.
+
 ### Added — Phase 4 market-data quality layer
 - Incoming price histories now undergo strict date, order, length, and positive-adjusted-close validation before they enter the browser cache or optimiser. Invalid provider data is excluded safely.
 - Each completed run displays retained/missing assets, stale-cache use, latest common date, alignment coverage, and anomalous adjusted-price moves. The deterministic quality checks are included in the offline suite.

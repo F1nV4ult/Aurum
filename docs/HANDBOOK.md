@@ -94,6 +94,7 @@ than treating Yahoo as a replaceable provider.
 
 ```
 (repo root = the deployed static site; outputDirectory ".")
+  landing.html     ← first-visit product landing page (served at `/`)
   index.html       ← the optimizer (open access, no auth gate)
   portfolios.html  ← 12 pre-built model portfolios + whole-share allocation
   privacy.html
@@ -101,6 +102,7 @@ than treating Yahoo as a replaceable provider.
   aurum.js → aurum.min.js            ← optimizer page controller (bundled)
   portfolios.js → portfolios.min.js  ← portfolios page (bundled)
   style.css → style.min.css
+  landing.css → landing.min.css
 
   components/aurum/                    ← bundled into the above; raw excluded from deploy
     engine.js     ← PURE quant library (no DOM/IO): moments (Ledoit-Wolf/EWMA/sample), 7 optimizers,

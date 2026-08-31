@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURUM — Portfolio Analytics, Made Inspectable</title>
+  <meta name="description" content="Explore portfolio allocation, risk and diversification with a browser-based analytical toolkit. Start with a model portfolio or build your own.">
+  <meta property="og:title" content="AURUM — Portfolio Analytics, Made Inspectable">
+  <meta property="og:description" content="Explore allocation, risk and diversification through transparent, browser-based portfolio analytics.">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="landing.min.css">
+  <script>
+    // Legacy share URLs historically pointed to /. Preserve them before the
+    // landing page paints, without triggering an optimisation automatically.
+    if (new URLSearchParams(location.search).has('p')) location.replace('/optimizer' + location.search + location.hash);
+  </script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="grid-field" aria-hidden="true"></div>
+
+  <header class="landing-header">
+    <a href="/" class="brand" aria-label="Aurum home">AURUM<span>Portfolio analytics</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="portfolios.html">Model portfolios</a>
+      <a href="/optimizer" class="nav-cta">Open optimizer <span>→</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span></span> Browser-based portfolio analytics</div>
+      <h1>Make portfolio<br><em>trade-offs visible.</em></h1>
+      <p class="hero-copy">Aurum is a transparent analytical workspace for exploring allocation, risk and diversification — built for inspection, not black-box recommendations.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="portfolios.html">Start with a model portfolio <span>→</span></a>
+        <a class="button secondary" href="/optimizer">Build a custom portfolio</a>
+      </div>
+      <div class="hero-meta">
+        <span><b>7</b> allocation methods</span><span><b>500+</b> curated instruments</span><span><b>0</b> accounts required</span>
+      </div>
+      <div class="signal-card" aria-hidden="true">
+        <div class="signal-label">ANALYSIS STATUS <b>READY</b></div>
+        <div class="signal-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="signal-row"><span>RISK MODEL</span><strong>LED. WOLF</strong></div>
+        <div class="signal-row"><span>DATA QUALITY</span><strong>CHECKED</strong></div>
+      </div>
+    </section>
+
+    <section class="pathways reveal" aria-labelledby="paths-heading">
+      <div class="section-kicker">CHOOSE A STARTING POINT</div>
+      <h2 id="paths-heading">Start with a question,<br>not a spreadsheet.</h2>
+      <div class="path-grid">
+        <a class="path-card" href="portfolios.html">
+          <span class="path-index">01</span><span class="path-icon">◫</span>
+          <h3>Explore model portfolios</h3>
+          <p>Browse scheduled, educational baskets across growth, risk, sector, thematic and style categories.</p>
+          <span class="path-link">View portfolios →</span>
+        </a>
+        <a class="path-card featured" href="/optimizer">
+          <span class="path-index">02</span><span class="path-icon">⌁</span>
+          <h3>Build your own analysis</h3>
+          <p>Choose holdings, constraints and a risk model. Aurum calculates the allocation and exposes its assumptions.</p>
+          <span class="path-link">Open optimizer →</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="tutorial reveal" aria-labelledby="tutorial-heading">
+      <div class="tutorial-intro"><div class="section-kicker">A SHORT WALKTHROUGH</div><h2 id="tutorial-heading">Three steps.<br>Everything inspectable.</h2><p>No setup or account is required. The calculations run in your browser, with market-data conditions made visible alongside the result.</p></div>
+      <ol class="steps">
+        <li><span>01</span><h3>Select a basket</h3><p>Search the curated universe or open a model portfolio in the optimizer.</p></li>
+        <li><span>02</span><h3>Set the method</h3><p>Choose an allocation approach, risk model, benchmark and constraints.</p></li>
+        <li><span>03</span><h3>Review the evidence</h3><p>Inspect weights, backtests, scenario outputs, data-quality notices and assumptions.</p></li>
+      </ol>
+    </section>
+
+    <section class="capabilities reveal" aria-labelledby="capability-heading">
+      <div class="section-kicker">BUILT FOR CLEARER DECISIONS</div>
+      <h2 id="capability-heading">The result is more than a set of weights.</h2>
+      <div class="capability-grid">
+        <article><span>↗</span><h3>Compare approaches</h3><p>Review seven allocation methods, risk measures and correlation structure in one place.</p></article>
+        <article><span>◌</span><h3>Keep a local record</h3><p>Save browser-local analysis snapshots and compare allocations, inputs and metrics later.</p></article>
+        <article><span>⌁</span><h3>See data conditions</h3><p>Freshness, missing assets, alignment and stale-cache usage are shown, not hidden.</p></article>
+      </div>
+    </section>
+
+    <section class="final-cta reveal">
+      <div><div class="section-kicker">READY WHEN YOU ARE</div><h2>Explore the portfolio<br><em>behind the output.</em></h2></div>
+      <a class="button primary" href="/optimizer">Open optimizer <span>→</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand">AURUM<span>An instrument by NovaSect</span></div>
+    <div><a href="https://github.com/prathyoosh-venkatraj/Aurum/blob/main/docs/HANDBOOK.md" target="_blank" rel="noopener noreferrer">Handbook ↗</a><a href="privacy.html">Privacy</a><a href="https://novasect.space" target="_blank" rel="noopener noreferrer">NovaSect ↗</a></div>
+    <p>For informational and educational purposes only. Not investment advice.</p>
+  </footer>
+</body>
+</html>
