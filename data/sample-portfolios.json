@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-08-31",
+    "generated": "2026-09-01",
     "refresh_frequency": "weekly",
     "universe_version": "1.0.0",
     "universe_count": 500,
@@ -625,70 +625,84 @@
           "name": "Apple Inc.",
           "sector": "Information Technology",
           "region": "US",
-          "weight": 0.172
+          "weight": 0.1625
         },
         {
           "ticker": "MU",
           "name": "Micron Technology Inc.",
           "sector": "Information Technology",
           "region": "US",
-          "weight": 0.172
+          "weight": 0.1625
         },
         {
           "ticker": "005930.KS",
           "name": "Samsung Electronics Co. Ltd.",
           "sector": "Information Technology",
           "region": "APAC",
-          "weight": 0.1389
-        },
-        {
-          "ticker": "GOOGL",
-          "name": "Alphabet Inc. Class A",
-          "sector": "Communication Services",
-          "region": "US",
-          "weight": 0.0923
+          "weight": 0.1395
         },
         {
           "ticker": "VZ",
           "name": "Verizon Communications Inc.",
           "sector": "Communication Services",
           "region": "US",
-          "weight": 0.0923
+          "weight": 0.0952
         },
         {
           "ticker": "WBD",
           "name": "Warner Bros. Discovery Inc.",
           "sector": "Communication Services",
           "region": "US",
-          "weight": 0.0923
-        },
-        {
-          "ticker": "PUBGY",
-          "name": "Publicis Groupe SA (ADR)",
-          "sector": "Communication Services",
-          "region": "EU",
-          "weight": 0.0877
-        },
-        {
-          "ticker": "TLSNY",
-          "name": "Telia Company AB (ADR)",
-          "sector": "Communication Services",
-          "region": "EU",
-          "weight": 0.076
+          "weight": 0.0952
         },
         {
           "ticker": "VOD",
           "name": "Vodafone Group Plc (ADR)",
           "sector": "Communication Services",
           "region": "EU",
-          "weight": 0.0608
+          "weight": 0.0952
+        },
+        {
+          "ticker": "GOOGL",
+          "name": "Alphabet Inc. Class A",
+          "sector": "Communication Services",
+          "region": "US",
+          "weight": 0.0792
+        },
+        {
+          "ticker": "PUBGY",
+          "name": "Publicis Groupe SA (ADR)",
+          "sector": "Communication Services",
+          "region": "EU",
+          "weight": 0.0782
+        },
+        {
+          "ticker": "KDDIY",
+          "name": "KDDI Corporation (ADR)",
+          "sector": "Communication Services",
+          "region": "APAC",
+          "weight": 0.0571
         },
         {
           "ticker": "NOK",
           "name": "Nokia Corporation (ADR)",
           "sector": "Information Technology",
           "region": "EU",
-          "weight": 0.0158
+          "weight": 0.0315
+        },
+        {
+          "ticker": "CRM",
+          "name": "Salesforce Inc.",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0.0027
+        },
+        {
+          "ticker": "INTC",
+          "name": "Intel Corporation",
+          "sector": "Information Technology",
+          "region": "US",
+          "weight": 0.0014
         },
         {
           "ticker": "MSFT",
@@ -740,38 +754,24 @@
           "weight": 0
         },
         {
-          "ticker": "CRM",
-          "name": "Salesforce Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0
-        },
-        {
           "ticker": "AMD",
           "name": "Advanced Micro Devices Inc.",
-          "sector": "Information Technology",
-          "region": "US",
-          "weight": 0
-        },
-        {
-          "ticker": "QCOM",
-          "name": "Qualcomm Inc.",
           "sector": "Information Technology",
           "region": "US",
           "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.8715,
-        "volatility": 0.2284,
-        "sharpe": 3.618,
-        "max_drawdown": -0.457,
-        "beta": 1.27
+        "expected_return": 0.873,
+        "volatility": 0.223,
+        "sharpe": 3.713,
+        "max_drawdown": -0.446,
+        "beta": 1.24
       },
       "region_split": {
-        "US": 0.6209,
-        "EU": 0.2402,
-        "APAC": 0.1389,
+        "US": 0.5986,
+        "EU": 0.2048,
+        "APAC": 0.1965,
         "EM": 0
       }
     },
@@ -825,10 +825,10 @@
           "weight": 0.1667
         },
         {
-          "ticker": "BAYRY",
-          "name": "Bayer AG (ADR)",
+          "ticker": "GILD",
+          "name": "Gilead Sciences Inc.",
           "sector": "Health Care",
-          "region": "EU",
+          "region": "US",
           "weight": 0.1667
         },
         {
@@ -867,13 +867,6 @@
           "weight": 0
         },
         {
-          "ticker": "GILD",
-          "name": "Gilead Sciences Inc.",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0
-        },
-        {
           "ticker": "SYK",
           "name": "Stryker Corporation",
           "sector": "Health Care",
@@ -881,36 +874,8 @@
           "weight": 0
         },
         {
-          "ticker": "BSX",
-          "name": "Boston Scientific Corporation",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0
-        },
-        {
-          "ticker": "MDT",
-          "name": "Medtronic plc",
-          "sector": "Health Care",
-          "region": "US",
-          "weight": 0
-        },
-        {
           "ticker": "NVO",
           "name": "Novo Nordisk A/S (ADR)",
-          "sector": "Health Care",
-          "region": "EU",
-          "weight": 0
-        },
-        {
-          "ticker": "AZN",
-          "name": "AstraZeneca PLC (ADR)",
-          "sector": "Health Care",
-          "region": "EU",
-          "weight": 0
-        },
-        {
-          "ticker": "SNY",
-          "name": "Sanofi S.A. (ADR)",
           "sector": "Health Care",
           "region": "EU",
           "weight": 0
@@ -928,26 +893,54 @@
           "sector": "Health Care",
           "region": "EU",
           "weight": 0
+        },
+        {
+          "ticker": "RHHBY",
+          "name": "Roche Holding AG (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "PHG",
+          "name": "Koninklijke Philips N.V. (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "SAUHF",
+          "name": "Straumann Holding AG (ADR)",
+          "sector": "Health Care",
+          "region": "EU",
+          "weight": 0
+        },
+        {
+          "ticker": "RDY",
+          "name": "Dr. Reddy's Laboratories Ltd. (ADR)",
+          "sector": "Health Care",
+          "region": "EM",
+          "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.4957,
-        "volatility": 0.1965,
-        "sharpe": 2.293,
-        "max_drawdown": -0.393,
-        "beta": 1.09
+        "expected_return": 0.4115,
+        "volatility": 0.1887,
+        "sharpe": 1.942,
+        "max_drawdown": -0.377,
+        "beta": 1.05
       },
       "region_split": {
-        "US": 0.8333,
-        "EU": 0.1667,
+        "US": 1,
+        "EU": 0,
         "APAC": 0,
         "EM": 0
       }
     },
     "energy-infra": {
       "name": "Energy & Infrastructure",
-      "tagline": "Real assets, capital flows, essential services",
-      "description": "Combines energy producers, utilities, and industrial operators — sectors that generate stable cash flows from physical assets. Lower correlation to tech-driven market moves; benefits from infrastructure spend and energy transition capex.",
+      "tagline": "Real-asset exposure across energy and infrastructure",
+      "description": "Max-Sharpe allocation across Energy, Utilities, and Industrials — capturing infrastructure spending and the energy-transition tailwind.",
       "objective": "max_sharpe",
       "category": "sector",
       "risk_level": "medium",
@@ -959,142 +952,79 @@
       "min_recommended_tier": 3000,
       "tickers": [
         {
+          "ticker": "SLB",
+          "name": "SLB (Schlumberger)",
+          "sector": "Energy",
+          "region": "US",
+          "weight": 0.2
+        },
+        {
+          "ticker": "MPC",
+          "name": "Marathon Petroleum Corporation",
+          "sector": "Energy",
+          "region": "US",
+          "weight": 0.2
+        },
+        {
+          "ticker": "PSX",
+          "name": "Phillips 66",
+          "sector": "Energy",
+          "region": "US",
+          "weight": 0.2
+        },
+        {
+          "ticker": "KMI",
+          "name": "Kinder Morgan Inc.",
+          "sector": "Energy",
+          "region": "US",
+          "weight": 0.2
+        },
+        {
+          "ticker": "E",
+          "name": "Eni S.p.A. (ADR)",
+          "sector": "Energy",
+          "region": "EU",
+          "weight": 0.2
+        },
+        {
           "ticker": "XOM",
           "name": "Exxon Mobil Corporation",
           "sector": "Energy",
           "region": "US",
-          "weight": 0.11
-        },
-        {
-          "ticker": "CVX",
-          "name": "Chevron Corporation",
-          "sector": "Energy",
-          "region": "US",
-          "weight": 0.1
-        },
-        {
-          "ticker": "NEE",
-          "name": "NextEra Energy Inc.",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.09
-        },
-        {
-          "ticker": "COP",
-          "name": "ConocoPhillips",
-          "sector": "Energy",
-          "region": "US",
-          "weight": 0.08
-        },
-        {
-          "ticker": "DUK",
-          "name": "Duke Energy Corporation",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.07
-        },
-        {
-          "ticker": "SO",
-          "name": "The Southern Company",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.07
-        },
-        {
-          "ticker": "WM",
-          "name": "Waste Management Inc.",
-          "sector": "Industrials",
-          "region": "US",
-          "weight": 0.06
-        },
-        {
-          "ticker": "HON",
-          "name": "Honeywell International Inc.",
-          "sector": "Industrials",
-          "region": "US",
-          "weight": 0.06
-        },
-        {
-          "ticker": "CAT",
-          "name": "Caterpillar Inc.",
-          "sector": "Industrials",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "ETN",
-          "name": "Eaton Corporation plc",
-          "sector": "Industrials",
-          "region": "US",
-          "weight": 0.05
-        },
-        {
-          "ticker": "AEP",
-          "name": "American Electric Power Co.",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "SRE",
-          "name": "Sempra Energy",
-          "sector": "Utilities",
-          "region": "US",
-          "weight": 0.04
-        },
-        {
-          "ticker": "SLB",
-          "name": "SLB",
-          "sector": "Energy",
-          "region": "US",
-          "weight": 0.04
+          "weight": 0
         },
         {
           "ticker": "EOG",
           "name": "EOG Resources Inc.",
           "sector": "Energy",
           "region": "US",
-          "weight": 0.03
+          "weight": 0
         },
         {
-          "ticker": "WMB",
-          "name": "Williams Companies Inc.",
+          "ticker": "SHEL",
+          "name": "Shell plc (ADR)",
           "sector": "Energy",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "DE",
-          "name": "Deere & Company",
-          "sector": "Industrials",
-          "region": "US",
-          "weight": 0.03
-        },
-        {
-          "ticker": "NGG",
-          "name": "National Grid plc (ADR)",
-          "sector": "Utilities",
           "region": "EU",
-          "weight": 0.03
+          "weight": 0
         },
         {
-          "ticker": "MMM",
-          "name": "3M Company",
-          "sector": "Industrials",
-          "region": "US",
-          "weight": 0.02
+          "ticker": "BP",
+          "name": "BP p.l.c. (ADR)",
+          "sector": "Energy",
+          "region": "EU",
+          "weight": 0
         }
       ],
       "stats": {
-        "expected_return": 0.2389,
-        "volatility": 0.123,
-        "sharpe": 1.577,
-        "max_drawdown": -0.066,
-        "beta": 0.11
+        "expected_return": 0.5287,
+        "volatility": 0.2174,
+        "sharpe": 2.225,
+        "max_drawdown": -0.435,
+        "beta": 1.21
       },
       "region_split": {
-        "US": 0.97,
-        "EU": 0.03,
+        "US": 0.8,
+        "EU": 0.2,
         "APAC": 0,
         "EM": 0
       }
